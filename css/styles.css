@@ -1,0 +1,21 @@
+/*AJUSTS F7*/
+.navbar {
+  height: 70px !important; }
+
+.page-content {
+  padding-top: 70px !important; }
+
+.list-block .item-inner:after {
+  background: none; }
+
+/*AJUSTS MATERIALIZE*/
+.progressbar {
+  height: 4px !important; }
+
+/*CUSTOM*/
+.menu-block ul {
+  background: none; }
+  .menu-block ul::after, .menu-block ul::before {
+    background: none !important; }
+
+/*# sourceMappingURL=styles.css.map */

@@ -27,7 +27,7 @@ import Routes from './routes.js'
 
 import App from './App'
 
-// Init F7 Vue Plugin
+// Init F7 Vue Plugins
 Vue.use(Framework7Vue)
 
 // Init App

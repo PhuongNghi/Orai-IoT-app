@@ -10,5 +10,9 @@ export default [
   {
     path: '/infos/',
     component: require('./components/pages/infos.vue')
+  },
+    {
+    path: '/detail/:id',
+    component: require('./components/pages/detail.vue')
   }
 ]

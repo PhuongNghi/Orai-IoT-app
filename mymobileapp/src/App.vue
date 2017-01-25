@@ -67,7 +67,6 @@
             </f7-navbar>
             <f7-list>
 
-            <my-block-event-actif></my-block-event-actif>
             <my-block-event></my-block-event>
 
             <!-- Bouton Add Event -->
@@ -86,13 +85,11 @@
 </template>
 
 <script>
-import BlockEventActif from 'components/blockeventactif'
 import BlockEvent from 'components/blockevent'
 
 export default {
 
   components: {
-    MyBlockEventActif: BlockEventActif,
     MyBlockEvent: BlockEvent
   },
   data(){

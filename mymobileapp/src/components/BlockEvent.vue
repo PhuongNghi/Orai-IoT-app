@@ -4,8 +4,8 @@
 
 <template>
   <div>
-    <f7-list-group class="progress-event" v-for="event in events">
-      <f7-link :href="event.url">
+    <f7-list-group class="progress-event" v-for="event, key in events">
+      <f7-link @click="checkEvent(key)" :href="linkEvent">
         <f7-block>
             <f7-progressbar :progress="event.progress" :color="event.color"></f7-progressbar>
         </f7-block>
@@ -18,25 +18,27 @@
 </template>
 
 <script>
+import ApiFire from '../api'
+var eventsRef = ApiFire.ref('events');
+
 export default {
 
   data () {
     return {
-      timeRemaining: '',
-      events: [
-        {
-          url: '/detail/2',
-          name: 'Dessins animés Camille',
-          progress: 100,
-          color: 'orange'
-        },
-        {
-          url: '/detail/3',
-          name: 'La sortie du nouveau Zelda',
-          progress: 10,
-          color: 'red'
-        }
-      ]
+      eventname: '',
+      eventdate: '',
+      eventcolor: '',
+      progress: '',
+      eventurl: '',
+      linkEvent: ''
+    }
+  },
+  firebase: {
+      events: eventsRef
+  },
+  methods: {
+    checkEvent: function(key){
+      this.linkEvent = "/detail/" + key;
     }
   }
 

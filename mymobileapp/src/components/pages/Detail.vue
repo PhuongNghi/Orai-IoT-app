@@ -10,22 +10,26 @@
       </f7-nav-right>
     </f7-navbar>
 
-    <div v-if="detail">
-      {{ detail.title }}
+    <div>
+      {{ events[id].name }}
     </div>
 
   </f7-page>
 </template>
 
 <script>
-import { getDetail } from '../../api'
+import ApiFire from '../../api'
 
 export default {
 
   data () {
     return {
-      error: null,
-      detail: null
+      eventname: '',
+      eventdate: '',
+      eventcolor: '',
+      progress: '',
+      status: false,
+      id:''
     }
   },
   created () {
@@ -34,16 +38,13 @@ export default {
   watch: {
     '$route': 'fetchData'
   },
+  firebase: {
+      events: ApiFire.ref('events')
+  },
   methods: {
     fetchData () {
-      this.error = this.detail = null
-      getDetail(this.$route.params.id, (err, detail) => {
-        if (err) {
-          this.error = err.toString()
-        } else {
-          this.detail = detail
-        }
-      })
+      console.log(this.$route.params.id);
+      this.id = this.$route.params.id;
     }
   }
 

@@ -72,13 +72,14 @@ ul.choose-colors{
 		  <f7-page-content tab id="tab-2">Tab 2 Content ...</f7-page-content>
 		</f7-page> -->
 
+	<form id="createEvent">
 		<div class="list-block">
 		  <ul>
 		    <li>
 		      <div class="item-content">
 		        <div class="item-inner">
 		          <div class="item-input">
-		            <input type="text" placeholder="Nom de l'événement">
+		            <input type="text" placeholder="Nom de l'événement" v-model="eventname">
 		          </div>
 		        </div>
 		      </div>
@@ -87,7 +88,7 @@ ul.choose-colors{
 		      <div class="item-content">
 		        <div class="item-inner">
 		          <div class="item-input">
-		            <input type="date" placeholder="Date" value="2014-04-30"> 
+		            <input type="date" placeholder="Date" v-model="eventdate"> 
 		            <f7-button round color="pink">Synchroniser</f7-button>
 		            <br>
 		          </div>
@@ -100,7 +101,7 @@ ul.choose-colors{
 		    			<ul class="choose-colors">
 						    <li>
 						      <label class="label-radio item-content">
-						        <input type="radio" name="my-radio" value="Books" checked="checked">
+						        <input type="radio" name="lightcolor" value="red" v-model="eventcolor">
 						        <div class="item-media">
 						          <i class="icon icon-form-radio"></i>
 						        </div>
@@ -111,7 +112,7 @@ ul.choose-colors{
 						    </li>
 						    <li>
 						      <label class="label-radio item-content">
-						        <input type="radio" name="my-radio" value="Movies">
+						        <input type="radio" name="lightcolor" value="green" v-model="eventcolor">
 						        <div class="item-media">
 						          <i class="icon icon-form-radio"></i>
 						        </div>
@@ -152,20 +153,52 @@ ul.choose-colors{
 					
 				</div>
 			</a>	
+
 			</li>
 			<li class="add-btn-valid">
 				<a href="">
-					<f7-button round color="pink">Valider</f7-button>
+					<f7-button round color="pink" type="submit" @click="addItem">Valider</f7-button>
 				</a>
 			</li>
 		  </ul>
 		</div>      
-
+	</form>
 
 
 	</f7-page>
 </template>
 
 <script>  
-export default {}  
+
+import ApiFire from '../../api'
+
+export default {
+	data(){
+		return{
+			eventname: '',
+			eventdate: '',
+			eventcolor: '',
+			progress: '',
+			status: false,
+			dateNow: ''
+		}
+	},
+	firebase: {
+    	events: ApiFire.ref('events')
+  	},
+	methods: {
+		addItem () {
+
+		  this.progress = Math.random() * (100 - 20) + 20;
+
+	      this.$firebaseRefs.events.push({
+	        name: this.eventname,
+	        date: this.eventdate,
+	        color: this.eventcolor,
+	        progress: this.progress,
+	        status: this.status
+	      })
+    	}
+	}
+}  
 </script> 

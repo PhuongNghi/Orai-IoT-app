@@ -28,6 +28,7 @@ import ApiFire from '../api'
 import Vue from 'vue'
 
 var eventsRef = ApiFire.ref('events');
+var nodeServer = 'http://orai.kevinmoutier.com/set';
 
 export default {
 
@@ -39,7 +40,6 @@ export default {
       date: ''
     }
   },
-
   firebase: {
       events: eventsRef
   },
@@ -55,6 +55,15 @@ export default {
           eventsRef.child(this.events[j]['.key']).child('status').set(false);
         }
       }
+
+      this.$http.get(nodeServer).then((response) => {
+        // success 
+        console.log(response);
+        
+      }, (response) => {
+        // error 
+      });
+
     }
   },
   mounted(){

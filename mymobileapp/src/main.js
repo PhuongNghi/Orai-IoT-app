@@ -10,6 +10,7 @@ import Framework7 from 'framework7'
 import Framework7Vue from 'framework7-vue'
 import VueFire from 'vuefire'
 import Firebase from 'firebase'
+import VueResource from 'vue-resource'
 
 // Import F7 iOS Theme Styles
 /* eslint-disable no-unused-vars */
@@ -32,6 +33,7 @@ import App from './App'
 // Init F7 Vue Plugins
 Vue.use(Framework7Vue)
 Vue.use(VueFire)
+Vue.use(VueResource)
 
 // Init App
 new Vue({

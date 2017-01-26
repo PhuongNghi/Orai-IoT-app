@@ -23,6 +23,12 @@
   height: 10px !important;
 }
 
+.page-content{
+  .tab{
+    padding-top: 109px;
+  }
+}
+
 </style>
 
 <template>
@@ -39,9 +45,15 @@
         <f7-pages>
           <f7-page>
             <f7-list>
-              <f7-list-item link="/compte/" title="Compte"></f7-list-item>
-              <f7-list-item link="/infos/" title="Information"></f7-list-item>
-              <f7-list-item link="#" title="Mettre en veille" class="veille"></f7-list-item>
+              <f7-list-item link="#">
+                <a href="/compte/" data-view=".main-view" class="close-panel">Mon Compte</a>
+              </f7-list-item>
+              <f7-list-item link="#">
+                <a href="/infos/" data-view=".main-view" class="close-panel">Informations</a>
+              </f7-list-item>
+              <f7-list-item link="#">
+                <a href="/veille/" data-view=".main-view" class="close-panel">Mettre en veille</a>
+              </f7-list-item>
             </f7-list>
           </f7-page>
         </f7-pages>
@@ -50,9 +62,8 @@
 
     <!-- Main Views -->
     <f7-views>
-      <f7-view id="main-view" navbar-through :dynamic-navbar="true" main>
+      <f7-view id="main-view" class="main-view" navbar-through :dynamic-navbar="true" main>
 
-        
         <!-- Pages -->
         <f7-pages>
           <f7-page class="home-page">
@@ -67,7 +78,23 @@
             </f7-navbar>
             <f7-list>
 
-            <my-block-event></my-block-event>
+            <!-- TABS -->
+            <f7-subnavbar>
+              <f7-buttons>
+                <f7-button tab-link="#event" active>Évènements</f7-button>
+                <f7-button tab-link="#minuteur">Minuteurs</f7-button>
+              </f7-buttons>
+            </f7-subnavbar>
+
+            <f7-page tabs no-page-content>
+              <f7-page-content tab active id="event">
+                <my-block-event></my-block-event>
+              </f7-page-content>
+
+              <f7-page-content tab id="minuteur">
+                 Tab 2 Content ...
+              </f7-page-content>
+            </f7-page>
 
             <!-- Bouton Add Event -->
             <f7-link href="/add/">

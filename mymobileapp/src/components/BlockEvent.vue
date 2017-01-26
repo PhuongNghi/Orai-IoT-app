@@ -11,9 +11,12 @@
         </f7-block>
         <f7-list-item :title="event.name">
         <f7-block>
-          J-{{event.daysDiff}}
+          {{event.daysDiff}} jours restants
         </f7-block>
-        <f7-button class="btn-send-to-sablier">Sablier</f7-button>
+        <f7-block v-if="event.status">
+          ACTIF
+        </f7-block>
+        <f7-button class="btn-send-to-sablier" @click="sendSablier(event, key)">Sablier</f7-button>
         </f7-list-item>
       </f7-link>
     </f7-list-group>
@@ -43,6 +46,15 @@ export default {
   methods: {
     checkEvent: function(key){
       this.linkEvent = "/detail/" + key;
+    },
+    sendSablier: function(event, key){
+      for (var j = 0; j < this.events.length; j++){
+        if (j == key){
+          eventsRef.child(this.events[key]['.key']).child('status').set(true);
+        } else{
+          eventsRef.child(this.events[j]['.key']).child('status').set(false);
+        }
+      }
     }
   },
   mounted(){

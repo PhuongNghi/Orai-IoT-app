@@ -86,7 +86,7 @@ ul.choose-colors{
 				      <div class="item-content">
 				        <div class="item-inner">
 				          <div class="item-input">
-				            <input type="date" placeholder="Date" v-model="eventdate"> 
+				            <input type="date" placeholder="Date" v-model="endDate"> 
 				            <f7-button round color="pink">Synchroniser</f7-button>
 				            <br>
 				          </div>
@@ -179,12 +179,12 @@ export default {
 	data(){
 		return{
 			eventname: '',
-			eventdate: '',
 			eventcolor: '',
 			progress: '',
 			status: false,
-			eventdateStamped: '',
-			daysDiff: ''
+			daysDiff: '',
+			endDate: '',
+			startDate: ''
 		}
 	},
 	firebase: {
@@ -193,7 +193,7 @@ export default {
 	methods: {
 		addItem () {
 
-			this.eventDateString = new Date(this.eventdate).toLocaleDateString();
+			this.eventDateString = new Date(this.endDate).toLocaleDateString();
 			this.eventDateSplit = this.eventDateString.split("/");
 			this.eventDateNew = this.eventDateSplit[2] + "-" + this.eventDateSplit[1] + "-" + this.eventDateSplit[0];
 
@@ -207,12 +207,12 @@ export default {
 			this.timeDiff = Math.abs(this.end.getTime() - this.now.getTime());
 			this.diffDays = Math.ceil(this.timeDiff / (1000 * 3600 * 24)); 
 
-			// this.progress = (100 - this.diffDays);
 			this.progress = Math.round(((this.now - this.start) / (this.end - this.start)) * 100);
 
 			this.$firebaseRefs.events.push({
 				name: this.eventname,
-				date: this.eventdate,
+				endDate: this.endDate,
+				startDate: this.nowNew,
 				color: this.eventcolor,
 				progress: this.progress,
 				status: this.status,

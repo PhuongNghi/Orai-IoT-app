@@ -29,7 +29,7 @@ export default {
       eventcolor: '',
       progress: '',
       status: false,
-      id:''
+      daysDiff: ''
     }
   },
   created () {

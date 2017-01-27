@@ -11,7 +11,7 @@
         </f7-block>
         <f7-list-item :title="event.name">
         <f7-block>
-          {{event.daysDiff}} jours restants
+          {{event.daysDiff}} jour<span v-if="event.daysDiff > 1">s</span> restant<span v-if="event.daysDiff > 1">s</span>
         </f7-block>
         <f7-block v-if="event.status">
           ACTIF
@@ -21,6 +21,9 @@
       </f7-link>
     </f7-list-group>
   </div>
+
+     
+
 </template>
 
 <script>
@@ -74,26 +77,26 @@ export default {
           newTimeDiff, newDaysDiff;
 
       var checkProgress = function(events, ref){
-          dateToday = new Date().getTime();
 
-          for (var i = 0; i < events.length; i++) {
-            singleEvent = events[i];
-
+            // DATE TODAY
             dateStartNew = new Date().toLocaleDateString();
             dateStartNewSplit = dateStartNew.split("/");
             dateStartNewFinal = dateStartNewSplit[2] + "-" + dateStartNewSplit[1] + "-" + dateStartNewSplit[0];
 
-            dateStart = new Date(dateStartNewFinal).getTime();
-            dateEnd = new Date(events[i].endDate).getTime();
 
-            // dateTodayTest = "2017-01-29";
+          for (var i = 0; i < events.length; i++) {
+            singleEvent = events[i];
+
+            // dateTodayTest = "2017-01-25";
+            dateStart = new Date(events[i].startDate).getTime();
+            dateEnd = new Date(events[i].endDate).getTime();
             dateToday = new Date().getTime();
 
-            newProgress = Math.round(((dateToday - dateStart) / (dateEnd - dateStart)) * 100);
+            newProgress = ((dateToday - dateStart) / (dateEnd - dateStart)) * 100;
+
             newTimeDiff = Math.abs(dateEnd - dateToday);
             newDaysDiff = Math.ceil(newTimeDiff / (1000 * 3600 * 24)); 
 
-            ref.child(singleEvent['.key']).child('startDate').set(dateStartNewFinal);
             ref.child(singleEvent['.key']).child('progress').set(newProgress);
             ref.child(singleEvent['.key']).child('daysDiff').set(newDaysDiff);
 
@@ -104,7 +107,7 @@ export default {
           };
       }
 
-      var events = setTimeout(function(){
+      var events = setInterval(function(){
           checkProgress(eventTableau, ref);
       },1500);
 

@@ -1,7 +1,16 @@
-export default [  
+export default [ 
+
   {
-    path: '/add/',
-    component: require('./components/pages/add.vue')
+    path: '/',
+    component: require('./App')
+  },
+  {
+    path: '/addevent/',
+    component: require('./components/pages/addevent.vue')
+  },
+  {
+    path: '/addminuteur/',
+    component: require('./components/pages/addminuteur.vue')
   },
   {
     path: '/compte/',

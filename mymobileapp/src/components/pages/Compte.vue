@@ -11,7 +11,7 @@
     </f7-navbar>
 
     <div>
-      MON COMPTE
+      Mon compte
     </div>
 
   </f7-page>

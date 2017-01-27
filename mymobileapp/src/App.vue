@@ -29,6 +29,12 @@
   }
 }
 
+#right-panel-view{
+  .menu-link{
+    width: 100vw;
+  }
+}
+
 </style>
 
 <template>
@@ -46,13 +52,13 @@
           <f7-page>
             <f7-list>
               <f7-list-item link="#">
-                <a href="/compte/" data-view=".main-view" class="close-panel">Mon Compte</a>
+                <a href="/compte/" data-view=".main-view" class="menu-link close-panel">Mon Compte</a>
               </f7-list-item>
               <f7-list-item link="#">
-                <a href="/infos/" data-view=".main-view" class="close-panel">Informations</a>
+                <a href="/infos/" data-view=".main-view" class="menu-link close-panel">Informations</a>
               </f7-list-item>
               <f7-list-item link="#">
-                <a href="/veille/" data-view=".main-view" class="close-panel">Mettre en veille</a>
+                <a href="/veille/" data-view=".main-view" class="menu-link close-panel">Mettre en veille</a>
               </f7-list-item>
             </f7-list>
           </f7-page>
@@ -89,6 +95,7 @@
             <f7-page tabs no-page-content>
               <f7-page-content tab active id="event">
                 <my-block-event></my-block-event>
+
               </f7-page-content>
 
               <f7-page-content tab id="minuteur">
@@ -97,7 +104,7 @@
             </f7-page>
 
             <!-- Bouton Add Event -->
-            <f7-link href="/add/">
+            <f7-link @click="checkTabs" :href="linkAdd">
               <f7-fab color="pink">
                   <f7-icon f7="add"></f7-icon>
               </f7-fab>
@@ -117,11 +124,21 @@ import BlockEvent from 'components/blockevent'
 export default {
 
   components: {
-    MyBlockEvent: BlockEvent
+    MyBlockEvent: BlockEvent,
   },
   data(){
     return{
-
+      linkAdd: ''
+    }
+  },
+  methods: {
+    checkTabs: function(){
+      this.tabActive = document.getElementsByClassName('active tab-link')[0].text;
+      if(this.tabActive == 'Évènements'){
+        this.linkAdd = '/addevent/';
+      } else if (this.tabActive == 'Minuteurs'){
+        this.linkAdd = '/addminuteur/';
+      }
     }
   }
 }

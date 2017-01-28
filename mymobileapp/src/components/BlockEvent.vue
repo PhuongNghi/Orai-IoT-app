@@ -1,43 +1,64 @@
 <style lang="scss">
+.progress-event {
+  .item-title{
+    font-size: 20px;
+  }
+}
+
+.progressbar-content{
+  padding: 0;
+}
+
 .progressbar{
   height: 4px !important;
+  border-radius: 0px !important;
 
   &.color-orange{
+    background: -webkitlinear-gradient(to right, rgba(232, 140, 58, 0.15), rgba(232, 140, 58, 0.35));
     background: linear-gradient(to right, rgba(232, 140, 58, 0.15), rgba(232, 140, 58, 0.35));
 
     span{
+      background: -webkitlinear-gradient(to right, #E83A3A , #FFC14C);
       background: linear-gradient(to right, #E83A3A , #FFC14C);
     }
   }
 
   &.color-blue{
+    background: -webkitlinear-gradient(to right, rgba(58, 216, 232, 0.15), rgba(58, 178, 232, 0.35));
     background: linear-gradient(to right, rgba(58, 216, 232, 0.15), rgba(58, 178, 232, 0.35));
 
     span{
+      background: -webkitlinear-gradient(to right, #00DFC3 , #2D9FE6);
       background: linear-gradient(to right, #00DFC3 , #2D9FE6);
     }
   }
 
   &.color-purple{
+    background: -webkitlinear-gradient(to right, rgba(79, 58, 232, 0.15), rgba(79, 58, 232, 0.35));
     background: linear-gradient(to right, rgba(79, 58, 232, 0.15), rgba(79, 58, 232, 0.35));
 
     span{
+      background: -webkitlinear-gradient(to right, #8776FF , #AD30B5);
       background: linear-gradient(to right, #8776FF , #AD30B5);
     }
   }
 
   &.color-amber{
+    background: -webkitlinear-gradient(to right, rgba(255, 215, 30, 0.15), rgba(255, 170, 27, 0.35));
     background: linear-gradient(to right, rgba(255, 215, 30, 0.15), rgba(255, 170, 27, 0.35));
 
     span{
+      background: -webkitlinear-gradient(to right, #FFD71E , #FFAA1A);
       background: linear-gradient(to right, #FFD71E , #FFAA1A);
     }
   }
 
   &.color-pink{
+    background: -webkitlinear-gradient(to right, rgba(255, 132, 158, 0.15), rgba(255, 72, 94, 0.35));
     background: linear-gradient(to right, rgba(255, 132, 158, 0.15), rgba(255, 72, 94, 0.35));
 
     span{
+      background: -webkitlinear-gradient(to right, #FF849E , #FF485E);
       background: linear-gradient(to right, #FF849E , #FF485E);
     }
   }
@@ -59,12 +80,29 @@
   color: #4F3AE8;
 }
 
+.pink{
+  color: #FF849E;
+}
+
 .days-remaining{
-  margin-top: -15px;
+  margin-top: -10px;
 
   .content-block{
     padding: 0;
   }
+
+  .item-inner{
+    padding-top: 0;
+  }
+}
+
+.progress-event{
+  width: 90%;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  margin-left: 7%;
+  -webkit-box-shadow: 0px 0px 11px 6px rgba(102, 52, 52, 0.04);
+  box-shadow: 0px 0px 11px 6px rgba(102, 52, 52, 0.04);
 }
 
 </style>
@@ -74,21 +112,29 @@
   <div>
     <f7-list-group class="progress-event" v-for="event, key in events">
       <f7-link @click="checkEvent(key)" :href="linkEvent" :class="event.color">
-        <f7-block>
+        <f7-block class="progressbar-content">
             <f7-progressbar :progress="event.progress" :color="event.color" class="progress-value"></f7-progressbar>
         </f7-block>
         <f7-list-item :title="event.name">
-          <f7-block v-if="event.status">
-            ACTIF
-          </f7-block>
-          <f7-button class="btn-send-to-sablier" @click="sendSablier(event, key)">Sablier</f7-button>
+          
         </f7-list-item>
         <f7-list-item class="days-remaining">
+
           <f7-block>
             {{event.daysDiff}} jour<span v-if="event.daysDiff > 1">s</span> restant<span v-if="event.daysDiff > 1">s</span>
           </f7-block>
-          
+
+          <f7-block v-if="event.status">
+            Actif
+          </f7-block>
+
+          <f7-block v-if="!event.status">
+            <f7-button class="btn-send-to-sablier" @click="sendSablier(event, key)">Activer</f7-button>
+          </f7-block>
+
         </f7-list-item>
+          
+          
       </f7-link>
     </f7-list-group>
   </div>

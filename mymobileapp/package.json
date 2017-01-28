@@ -7,10 +7,10 @@
   "scripts": {
     "dev": "node build/dev-server.js",
     "build": "node build/build.js",
-    "cordova-build": "sudo npm run build && cordova build",
-    "cordova-run": "sudo npm run build && cordova run browser",
-    "cordova-run-ios": "sudo npm run build && cordova run ios",
-    "cordova-run-android": "sudo npm run build && cordova run android"
+    "cordova-build": "npm run build && cordova build",
+    "cordova-run": "npm run build && cordova run browser",
+    "cordova-run-ios": "npm run build && cordova run ios",
+    "cordova-run-android": "npm run build && sudo cordova run android"
   },
   "dependencies": {
     "firebase": "^3.6.6",

@@ -111,7 +111,7 @@
 
   <div>
     <f7-list-group class="progress-event" v-for="event, key in events">
-      <f7-link @click="checkEvent(key)" :href="linkEvent" :class="event.color">
+      <f7-link :href="'/detail/'+key" :class="event.color">
         <f7-block class="progressbar-content">
             <f7-progressbar :progress="event.progress" :color="event.color" class="progress-value"></f7-progressbar>
         </f7-block>
@@ -162,9 +162,6 @@ export default {
       events: eventsRef
   },
   methods: {
-    checkEvent: function(key){
-      this.linkEvent = "/detail/" + key;
-    },
     sendSablier: function(event, key){
       for (var j = 0; j < this.events.length; j++){
         if (j == key){
@@ -184,7 +181,7 @@ export default {
 
     }
   },
-  mounted(){
+  mounted(){      
       var eventTableau = this.events,
           ref = eventsRef,
           dateToday, dateStartNew, dateStartNewSplit, dateStartNewFinal, 
@@ -197,7 +194,6 @@ export default {
             dateStartNew = new Date().toLocaleDateString();
             dateStartNewSplit = dateStartNew.split("/");
             dateStartNewFinal = dateStartNewSplit[2] + "-" + dateStartNewSplit[1] + "-" + dateStartNewSplit[0];
-
 
           for (var i = 0; i < events.length; i++) {
             singleEvent = events[i];

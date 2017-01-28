@@ -19,10 +19,6 @@
   background-color: white;
 }
 
-.progress-bar{
-  height: 10px !important;
-}
-
 .page-content{
   .tab{
     padding-top: 109px;
@@ -33,6 +29,17 @@
   .menu-link{
     width: 100vw;
   }
+}
+
+.add-button{
+    position: relative;
+    bottom: -76vh;
+    width: 50%;
+    margin: 0 auto;
+    background: linear-gradient(to right, #F15F6A, #FF8E70) !important;
+    border-radius: 76px;
+    border: 0;
+    color: white !important;
 }
 
 </style>
@@ -104,11 +111,15 @@
             </f7-page>
 
             <!-- Bouton Add Event -->
-            <f7-link @click="checkTabs" :href="linkAdd">
+           <!--  <f7-link @click="checkTabs" :href="linkAdd">
               <f7-fab color="pink">
-                  <f7-icon f7="add"></f7-icon>
+                  <span v-if="linkAdd == '/addevent/'">Évenement</span>
               </f7-fab>
-            </f7-link>
+            </f7-link> -->
+
+            <f7-button class="add-button" @click="checkTabs" :href="linkAdd">
+                 <span v-if="linkAdd == '/addevent/'">Ajouter un évènement</span>
+            </f7-button>
 
           </f7-page>
         </f7-pages>
@@ -130,6 +141,9 @@ export default {
     return{
       linkAdd: ''
     }
+  },
+  mounted(){
+    this.checkTabs()
   },
   methods: {
     checkTabs: function(){

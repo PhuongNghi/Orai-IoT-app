@@ -123,7 +123,7 @@ ul.choose-colors{
 							    </li>
 							    <li>
 							      <label class="label-radio item-content">
-							        <input type="radio" name="lightcolor" value="green" v-model="eventcolor">
+							        <input type="radio" name="lightcolor" value="pink" v-model="eventcolor">
 							        <div class="item-media">
 							          <i class="icon icon-form-radio"></i>
 							        </div>
@@ -201,7 +201,7 @@ ul.choose-colors{
 
 				</li>
 				<li class="add-btn-valid">
-					<a href="">
+					<a href="/">
 						<f7-button round color="pink" type="submit" @click="addItem">Valider</f7-button>
 					</a>
 				</li>
@@ -238,7 +238,7 @@ export default {
 			// this.eventDateString = new Date(this.endDate).toLocaleDateString();
 			// this.eventDateSplit = this.eventDateString.split("/");
 			// this.eventDateNew = this.eventDateSplit[2] + "-" + this.eventDateSplit[1] + "-" + this.eventDateSplit[0];
-			
+
 			this.end = new Date(this.endDate).getTime();
 			this.start = new Date().getTime();
 			this.now = new Date().getTime();

@@ -6,7 +6,10 @@ input[type='text'], input[type='email']{
 
 input[type='date']{
 	color: #ff2d55 !important;
+	-webkit-appearance: normal;
+    appearance: normal;
 }
+
 
 *::-webkit-input-placeholder {
     color: #ff2d55;

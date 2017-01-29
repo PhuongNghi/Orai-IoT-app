@@ -1,4 +1,9 @@
 <style lang="scss">
+.event-name{
+  font-family: "Grifo-M-Bold";
+  letter-spacing: 1.5px;
+}
+
 .progress-event {
   .item-title{
     font-size: 20px;
@@ -86,9 +91,11 @@
 
 .days-remaining{
   margin-top: -10px;
+  font-family: "Interstate-Light";
 
   .content-block{
     padding: 0;
+    color: rgba(136, 80, 73, 0.5) !important;
   }
 
   .item-inner{
@@ -103,6 +110,34 @@
   margin-left: 7%;
   -webkit-box-shadow: 0px 0px 11px 6px rgba(102, 52, 52, 0.04);
   box-shadow: 0px 0px 11px 6px rgba(102, 52, 52, 0.04);
+  position: relative;
+
+  &::after{
+    content: '';
+    width: 12px;
+    height: 12px;
+    background-color: #ffffff;
+    position: absolute;
+    z-index: 12;
+    bottom: 0;
+    border-radius: 50%;
+    left: -19px;
+    top: -3px;
+    border: solid 4px;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+  }
+
+  &::before{
+    content: '';
+    width: 3px;
+    height: 120%;
+    background-color: #ffffff;
+    position: absolute;
+    z-index: 12;
+    left: -15px;
+  }
 }
 
 </style>
@@ -110,12 +145,12 @@
 <template>
 
   <div>
-    <f7-list-group class="progress-event" v-for="event, key in events">
+    <f7-list-group class="progress-event" v-for="event, key in events" :class="event.color">
       <f7-link :href="'/detail/'+key" :class="event.color">
         <f7-block class="progressbar-content">
             <f7-progressbar :progress="event.progress" :color="event.color" class="progress-value"></f7-progressbar>
         </f7-block>
-        <f7-list-item :title="event.name">
+        <f7-list-item class="event-name" :title="event.name">
           
         </f7-list-item>
         <f7-list-item class="days-remaining">
@@ -133,8 +168,6 @@
           </f7-block>
 
         </f7-list-item>
-          
-          
       </f7-link>
     </f7-list-group>
   </div>
@@ -155,7 +188,8 @@ export default {
       eventdate: '',
       linkEvent: '',
       progress: '',
-      date: ''
+      date: '',
+      nextColor: ''
     }
   },
   firebase: {
@@ -186,7 +220,7 @@ export default {
           ref = eventsRef,
           dateToday, dateStartNew, dateStartNewSplit, dateStartNewFinal, 
           dateStart, dateEnd, newProgress, singleEvent, dateTodayTest,
-          newTimeDiff, newDaysDiff;
+          newTimeDiff, newDaysDiff, next, nextColor;
 
       var checkProgress = function(events, ref){
 
@@ -195,9 +229,19 @@ export default {
             dateStartNewSplit = dateStartNew.split("/");
             dateStartNewFinal = dateStartNewSplit[2] + "-" + dateStartNewSplit[1] + "-" + dateStartNewSplit[0];
 
+          for (var k = 0; k < events.length - 1; k++){
+            next = events[k+1];
+            nextColor = next.color;
+            // console.log(nextColor);
+
+            // ref.push({
+            //   nextColor: next.color
+            // }); SET PLUTOT
+          }
+
           for (var i = 0; i < events.length; i++) {
             singleEvent = events[i];
-
+            
             // dateTodayTest = "2017-01-25";
             dateStart = new Date(events[i].startDate).getTime();
             dateEnd = new Date(events[i].endDate).getTime();
@@ -209,7 +253,7 @@ export default {
             newDaysDiff = Math.ceil(newTimeDiff / (1000 * 3600 * 24)); 
 
             ref.child(singleEvent['.key']).child('progress').set(newProgress);
-            ref.child(singleEvent['.key']).child('daysDiff').set(newDaysDiff);
+            ref.child(singleEvent['.key']).child('daysDiff').set(newDaysDiff);         
 
             // Remove event if J-0
             if(dateToday > dateEnd){

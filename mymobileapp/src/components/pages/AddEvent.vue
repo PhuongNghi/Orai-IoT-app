@@ -229,7 +229,8 @@ export default {
 			status: false,
 			daysDiff: '',
 			endDate: '',
-			startDate: ''
+			startDate: '',
+			nextColor: ''
 		}
 	},
 	firebase: {
@@ -258,7 +259,8 @@ export default {
 				color: this.eventcolor,
 				progress: this.progress,
 				status: this.status,
-				daysDiff: this.diffDays
+				daysDiff: this.diffDays,
+				nextColor: this.nextColor
 			})
 		}
 	}

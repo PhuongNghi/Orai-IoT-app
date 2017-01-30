@@ -11,6 +11,7 @@ import Framework7Vue from 'framework7-vue'
 import VueFire from 'vuefire'
 import Firebase from 'firebase'
 import VueResource from 'vue-resource'
+import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 // Import F7 iOS Theme Styles
 /* eslint-disable no-unused-vars */
@@ -34,6 +35,7 @@ import App from './App'
 Vue.use(Framework7Vue)
 Vue.use(VueFire)
 Vue.use(VueResource)
+Vue.use(VueAwesomeSwiper)
 
 // Init App
 new Vue({

@@ -40,6 +40,34 @@
   src: url("assets/font/grifo-regular-m.ttf") format('truetype');
 }
 
+.login-input{
+  input, input[type='text'], input[type='email']{
+    margin-bottom: 30px;
+    text-align: center;
+    border-bottom: rgba(153, 62, 62, 0.5) solid 1px !important;
+    color: #9B3C80;
+    font-family: "Grifo-M-Bold";
+    letter-spacing: 1px;
+    font-size: 26px;
+    transition: all .15s linear;
+
+    &.focus-state{
+      border-bottom: #86D3D7 solid 1px !important;
+    } 
+  }
+
+  ::-webkit-input-placeholder{
+    font-size: 17px !important;
+    color: rgba(153, 62, 62, 0.5);
+    font-family: "Interstate-Light";
+  }
+}
+
+.login-screen-content{
+  form{
+    margin: 44% auto !important;
+  }
+}
 
 .page{
   background: none;
@@ -80,6 +108,11 @@
     left: -8px;
     bottom: 11px;
     z-index: 34;
+  }
+
+  .right{
+    position: relative;
+    top: -50px;
   }
 
   &::after{
@@ -155,7 +188,8 @@
     margin-top: 426px;
 }
 
-.add-button{
+.add-button, .close-login{
+    font-family: "Interstate-Light";
     position: relative;
     bottom: -8vh;
     width: 50%;
@@ -170,12 +204,120 @@
     color: white !important;
 }
 
+.close-login{
+  a{
+    line-height: 55px !important;
+    color: white !important;
+  }  
+}
+
+.swiper-container{
+  height: 100vh;
+  background: -webkit-linear-gradient(#FFF6EF, #FFFFFF) !important; 
+  background: linear-gradient(#FFF6EF, #FFFFFF) !important;
+}
+
+.swiper-slide{
+  text-align: center;
+
+  img{
+    width: 70%;
+    margin-top: 42px;
+  }
+}
+
+.swiper-pagination-bullet{
+  background-color: rgba(232, 106, 61, 30);
+
+  .swiper-pagination-bullet-active{
+    background: #F8776D !important;
+  }
+}
+
+.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
+  bottom: 100px;
+}
+
+.swiper-button-next{
+  top: 91%;
+  right: 47%;
+}
+
+.close-slider{
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  z-index: 2;
+}
+
+#close-final-slider{
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  width: 78px;
+  z-index: 2;
+  bottom: 55px;
+  display: none;
+}
+
+.popup{
+  display: block !important;
+}
+
 </style>
 
 <template>
   <!-- App -->
   <div id="app">
 
+    <!-- Login Screen -->
+    <div class="login-screen modal-in">
+      <f7-view>
+        <f7-pages>
+          <f7-page login-screen>
+            <f7-list form>
+              <f7-list-item>
+                <f7-input name="username" placeholder="Username" type="text" class="login-input"></f7-input>
+              </f7-list-item>
+              <f7-list-item>
+                <f7-input name="password" type="password" placeholder="Password" class="login-input"></f7-input>
+              </f7-list-item>
+            </f7-list>
+            <f7-list>
+              <f7-list-button close-login-screen class="close-login" @click="openTuto">Valider</f7-list-button>
+            </f7-list>
+          </f7-page>
+        </f7-pages>
+      </f7-view>
+    </div>
+
+    <!-- Swiper -->
+    <div id="popup-tuto" class="popup">
+      <span class="close-slider" @click="closeTuto">SKIP</span>
+      <span id="close-final-slider" @click="closeTuto">J'ai compris</span>
+      <swiper :options="swiperOption">
+        <swiper-slide>
+          <img src="./assets/1.svg" alt="">
+        </swiper-slide>
+        <swiper-slide>
+          <img src="./assets/2.svg" alt="">
+        </swiper-slide>
+        <swiper-slide>
+          <img src="./assets/3.svg" alt="">
+        </swiper-slide>
+        <swiper-slide>
+          <img src="./assets/4.svg" alt="">
+        </swiper-slide>
+        <swiper-slide id="last-slide">
+          <img src="./assets/5.svg" alt="">
+        </swiper-slide>
+        <div class="swiper-pagination" slot="pagination"></div>
+        <div id="btn-slider-next" class="swiper-button-next" slot="button-next" @click="checkLastSlide"></div>
+      </swiper>
+    </div>
+    
     <!-- Statusbar -->
     <f7-statusbar></f7-statusbar>
 
@@ -224,12 +366,9 @@
               </f7-buttons>
             </f7-subnavbar>
             </f7-navbar>
-
-
-            <f7-list>
-
-
             
+            <f7-list>
+          
             <f7-page tabs no-page-content swipeable class="main-tabs-content">
               <f7-page-content tab active id="event">
                 <my-block-event></my-block-event>
@@ -264,15 +403,22 @@ import BlockEvent from 'components/blockevent'
 export default {
 
   components: {
-    MyBlockEvent: BlockEvent,
+    MyBlockEvent: BlockEvent
   },
   data(){
     return{
-      linkAdd: ''
+      linkAdd: '',
+      tuto: '',
+      lastSlide: '',
+      swiperOption: {
+        pagination: '.swiper-pagination',
+        paginationClickable: true,
+        nextButton: '.swiper-button-next'
+      }
     }
   },
   mounted(){
-    this.checkTabs()
+    this.checkTabs();
   },
   methods: {
     checkTabs: function(){
@@ -290,6 +436,22 @@ export default {
       } else if (this.tabActive !== 'Minuteurs'){
         this.linkAdd = '/addminuteur/';
       }
+    },
+    openTuto: function(){
+      this.tuto = document.getElementById("popup-tuto");
+      this.tuto.classList.add("modal-in");
+    },
+    closeTuto: function(){
+      this.tuto = document.getElementById("popup-tuto");
+      this.tuto.classList.add("modal-out");
+    },
+    checkLastSlide: function(){
+      this.lastSlide = document.getElementById('last-slide').classList.contains('swiper-slide-next');
+      if(this.lastSlide){
+        document.getElementById('btn-slider-next').style.display = 'none';
+        document.getElementById('close-final-slider').style.display = 'block';
+      }
+      // console.log(this.lastSlide);
     }
   }
 }

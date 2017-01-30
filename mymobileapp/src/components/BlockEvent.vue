@@ -71,22 +71,142 @@
 
 .orange{
   color: #E88C3A;
+
+  &.progress-event-deco-pink{
+    &:before{
+       background: linear-gradient(#E88C3A, #FF849E);
+    }
+  }
+
+  &.progress-event-deco-amber{
+    &:before{
+       background: linear-gradient(#E88C3A, #FFAA1A);
+    }
+  }
+
+  &.progress-event-deco-blue{
+    &:before{
+       background: linear-gradient(#E88C3A, #1595E4);
+    }
+  }
+
+  &.progress-event-deco-purple{
+    &:before{
+       background: linear-gradient(#E88C3A, #4F3AE8);
+    }
+  }
 }
 
 .amber{
   color: #FFAA1A;
+
+  &.progress-event-deco-pink{
+    &:before{
+       background: linear-gradient(#FFAA1A, #FF849E);
+    }
+  }
+
+  &.progress-event-deco-blue{
+    &:before{
+       background: linear-gradient(#FFAA1A, #1595E4);
+    }
+  }
+
+  &.progress-event-deco-purple{
+    &:before{
+       background: linear-gradient(#FFAA1A, #4F3AE8);
+    }
+  }
+
+  &.progress-event-deco-orange{
+    &:before{
+       background: linear-gradient(#FFAA1A, #E88C3A);
+    }
+  }
 }
 
 .blue{
   color: #1595E4;
+
+  &.progress-event-deco-pink{
+    &:before{
+       background: linear-gradient(#1595E4, #FF849E);
+    }
+  }
+
+  &.progress-event-deco-purple{
+    &:before{
+       background: linear-gradient(#1595E4, #4F3AE8);
+    }
+  }
+
+  &.progress-event-deco-amber{
+    &:before{
+       background: linear-gradient(#1595E4, #FFAA1A);
+    }
+  }
+
+  &.progress-event-deco-orange{
+    &:before{
+       background: linear-gradient(#1595E4, #E88C3A);
+    }
+  }
 }
 
 .purple{
   color: #4F3AE8;
+
+  &.progress-event-deco-pink{
+    &:before{
+       background: linear-gradient(#4F3AE8, #FF849E);
+    }
+  }
+
+  &.progress-event-deco-blue{
+    &:before{
+       background: linear-gradient(#4F3AE8, #1595E4);
+    }
+  }
+
+  &.progress-event-deco-amber{
+    &:before{
+       background: linear-gradient(#4F3AE8, #FFAA1A);
+    }
+  }
+
+  &.progress-event-deco-orange{
+    &:before{
+       background: linear-gradient(#4F3AE8, #E88C3A);
+    }
+  }
 }
 
 .pink{
   color: #FF849E;
+
+  &.progress-event-deco-blue{
+    &:before{
+       background: linear-gradient(#FF849E, #1595E4);
+    }
+  }
+
+  &.progress-event-deco-purple{
+    &:before{
+       background: linear-gradient(#FF849E, #4F3AE8);
+    }
+  }
+
+  &.progress-event-deco-orange{
+    &:before{
+       background: linear-gradient(#FF849E, #E88C3A);
+    }
+  }
+
+  &.progress-event-deco-amber{
+    &:before{
+       background: linear-gradient(#FF849E, #FFAA1A);
+    }
+  }
 }
 
 .days-remaining{
@@ -132,8 +252,7 @@
   &::before{
     content: '';
     width: 3px;
-    height: 120%;
-    background-color: #ffffff;
+    height: 123%;
     position: absolute;
     z-index: 12;
     left: -15px;
@@ -145,7 +264,7 @@
 <template>
 
   <div>
-    <f7-list-group class="progress-event" v-for="event, key in events" :class="event.color">
+    <f7-list-group class="progress-event" v-for="event, key in events" :class="[event.color, event.nextColor]">
       <f7-link :href="'/detail/'+key" :class="event.color">
         <f7-block class="progressbar-content">
             <f7-progressbar :progress="event.progress" :color="event.color" class="progress-value"></f7-progressbar>
@@ -220,24 +339,23 @@ export default {
           ref = eventsRef,
           dateToday, dateStartNew, dateStartNewSplit, dateStartNewFinal, 
           dateStart, dateEnd, newProgress, singleEvent, dateTodayTest,
-          newTimeDiff, newDaysDiff, next, nextColor;
+          newTimeDiff, newDaysDiff, next, nextColor, nextColorHex, mainColor,
+          mainColorHex;
+      var styleElem = document.head.appendChild(document.createElement("style"));
 
       var checkProgress = function(events, ref){
 
-            // DATE TODAY
-            dateStartNew = new Date().toLocaleDateString();
-            dateStartNewSplit = dateStartNew.split("/");
-            dateStartNewFinal = dateStartNewSplit[2] + "-" + dateStartNewSplit[1] + "-" + dateStartNewSplit[0];
+          dateStartNew = new Date().toLocaleDateString();
+          dateStartNewSplit = dateStartNew.split("/");
+          dateStartNewFinal = dateStartNewSplit[2] + "-" + dateStartNewSplit[1] + "-" + dateStartNewSplit[0];
 
           for (var k = 0; k < events.length - 1; k++){
             next = events[k+1];
-            nextColor = next.color;
-            // console.log(nextColor);
-
-            // ref.push({
-            //   nextColor: next.color
-            // }); SET PLUTOT
-          }
+            nextColor = 'progress-event-deco-'+next.color;
+            singleEvent = events[k];
+            mainColor = singleEvent.color;
+            ref.child(singleEvent['.key']).child('nextColor').set(nextColor);
+          };
 
           for (var i = 0; i < events.length; i++) {
             singleEvent = events[i];

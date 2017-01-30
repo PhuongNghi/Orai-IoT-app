@@ -300,7 +300,6 @@
             <f7-progressbar :progress="event.progress" :color="event.color" class="progress-value"></f7-progressbar>
         </f7-block>
         <f7-list-item class="event-name" :title="event.name">
-          
         </f7-list-item>
         <f7-list-item class="days-remaining">
 
@@ -352,7 +351,6 @@ export default {
           eventsRef.child(this.events[j]['.key']).child('status').set(false);
         }
       }
-
 
     this.$http.post(nodeServer, {
         endDate: this.events[key].endDate, 

@@ -376,7 +376,8 @@
               </f7-page-content>
 
               <f7-page-content tab id="minuteur">
-                 Tab 2 Content ...
+                 <my-block-minuterie></my-block-minuterie>
+
               </f7-page-content>
             </f7-page>
 
@@ -399,11 +400,13 @@
 
 <script>
 import BlockEvent from 'components/blockevent'
+import BlockMinuterie from 'components/blockminuteurs'
 
 export default {
 
   components: {
-    MyBlockEvent: BlockEvent
+    MyBlockEvent: BlockEvent,
+    MyBlockMinuterie: BlockMinuterie
   },
   data(){
     return{

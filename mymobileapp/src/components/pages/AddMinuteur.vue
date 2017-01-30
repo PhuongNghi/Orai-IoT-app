@@ -132,7 +132,7 @@ ul.choose-colors{
 							    </li>
 							    <li>
 							      <label class="label-radio item-content">
-							        <input type="radio" name="lightcolor" value="green" v-model="eventcolor">
+							        <input type="radio" name="lightcolor" value="pink" v-model="eventcolor">
 							        <div class="item-media">
 							          <i class="icon icon-form-radio"></i>
 							        </div>
@@ -175,9 +175,15 @@ ul.choose-colors{
 							      </label>
 							    </li>
 
+
 							  </ul>
+
+
 			    		</div>
 			    	</div>
+
+			    							 COULEUR : {{eventcolor}}
+
 			    </li>
 				<li class="add-buttons-bonus">
 				<a href="">
@@ -224,44 +230,70 @@ ul.choose-colors{
 <script>  
 
 import ApiFire from '../../api'
+var minuterieRef = ApiFire.ref('minuteurs');
 
 export default {
 	data(){
 		return{
 			eventname: '',
 			eventcolor: '',
-			progress: '',
 			status: false,
-			daysDiff: '',
 			endDate: '',
-			endDateFinal: '',
-			endDuree: '',
-			endDureeFinal: '',
 			startDate: '',
 			nextColor: '',
-			optionsDureeHour: '',
-		    optionsDureeMinutes: '',
-		    optionsStartHour: '',
-		    optionsStartMinutes: ''
+			color:'',
+			eventDuree: '',
+			endDuree: '',
+			progress: ''
 		}
 	},
 	firebase: {
-		minuteurs: ApiFire.ref('minuteurs')
+		minuteurs: minuterieRef
 	},
 	methods: {
 		addItem () {
 
-			this.today = new Date();
 			this.endDureeSplit = this.endDuree.split(":");
-			this.endDureeHours = this.today.setHours(this.endDureeSplit[0]);
-			this.endDureeMinutes = this.today.setMinutes(this.endDureeSplit[1]);
+			this.endDureeHours = this.endDureeSplit[0];
+			this.endDureeMinutes = this.endDureeSplit[1];
 
-			this.endDateFinal = new Date(this.endDate).getTime();
-			console.log(this.endDateFinal);
+			this.now = new Date().getTime();
+			this.endDateUTC = new Date(this.endDate).toUTCString();
+			this.endDateStamped = new Date(this.endDateUTC).getTime();
+			this.endDateStampedHours = (new Date(this.endDateUTC).getHours() - 1);
 
-			// this.end = this.endDateFinal;
-			// this.start = new Date().getTime();
-			// this.now = new Date().getTime();
+			//DATE COMMENCEMENT
+			this.endDateStamped = new Date(this.endDate.replace('T', ' ').replace('-', '/')).getTime();
+
+			// DATE FINALE
+			if(this.endDate){
+				this.endDateFinalMinutes = (this.endDateStamped + this.endDureeMinutes * 60000);
+				this.endDateFinal = (this.endDateFinalMinutes + this.endDateStampedHours*60*60*1000);
+			}
+			else {
+				this.endDateFinalMinutes = (this.now + this.endDureeMinutes * 60000);
+				this.endDateFinal = (this.endDateFinalMinutes + this.endDureeHours*60*60*1000);
+			}
+
+			this.$firebaseRefs.minuteurs.push({
+				name: this.eventname,
+				color: this.eventcolor,
+				startDate: this.now,
+				eventDuree: this.endDuree,
+				endDate: this.endDateFinal,
+				nextColor: this.nextColor,
+				status: this.status,
+				progress: this.progress
+			});
+
+			for (var k = 0; k < this.minuteurs.length - 1; k++){
+	            this.next = this.minuteurs[k+1];
+	            this.nextColor = 'progress-event-deco-'+this.next.color;
+	            this.singleEvent = this.minuteurs[k];
+	            this.mainColor = this.singleEvent.color;
+	            ApiFire.ref('minuteurs').child(this.singleEvent['.key']).child('nextColor').set(this.nextColor);
+          	};
+			
 		}
 	},
 }  

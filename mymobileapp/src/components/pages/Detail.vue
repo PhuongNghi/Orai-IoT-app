@@ -39,7 +39,8 @@ export default {
     '$route': 'fetchData'
   },
   firebase: {
-      events: ApiFire.ref('events')
+      events: ApiFire.ref('events'),
+      minuterie: ApiFire.ref('minuterie'),
   },
   methods: {
     fetchData () {

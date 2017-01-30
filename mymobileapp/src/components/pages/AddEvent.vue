@@ -58,7 +58,7 @@ ul.choose-colors{
 	}
 }
 
-.label-radio.active-state{
+/*.label-radio.active-state{
 	background-color: transparent !important;
 }
 
@@ -74,7 +74,7 @@ ul.choose-colors{
 			padding-left: 0 !important;
 		}
 	}
-}
+}*/
 
 </style>
 
@@ -103,75 +103,79 @@ ul.choose-colors{
 			        <div class="item-inner">
 			          <div class="item-input">
 			            <input type="date" placeholder="Date" v-model="endDate"> 
-			            <f7-button round color="pink">Synchroniser</f7-button>
 			            <br>
 			          </div>
 			        </div>
 			      </div>
 			    </li>
 			    <li>
-			    	<div class="item-content wrap-colors">
-			    		<div class="item-inner">
-			    			<ul class="choose-colors">
-							    <li>
-							      <label class="label-radio item-content">
-							        <input type="radio" name="lightcolor" value="purple" v-model="eventcolor">
-							        <div class="item-media">
-							          <i class="icon icon-form-radio"></i>
-							        </div>
-							        <div class="item-inner">
-							          <div class="item-title">Purple</div>
-							        </div>
-							      </label>
-							    </li>
-							    <li>
-							      <label class="label-radio item-content">
-							        <input type="radio" name="lightcolor" value="pink" v-model="eventcolor">
-							        <div class="item-media">
-							          <i class="icon icon-form-radio"></i>
-							        </div>
-							        <div class="item-inner">
-							          <div class="item-title">Pink</div>
-							        </div>
-							      </label>
-							    </li>
-							    <li>
-							      <label class="label-radio item-content">
-							        <input type="radio" name="lightcolor" value="amber" v-model="eventcolor">
-							        <div class="item-media">
-							          <i class="icon icon-form-radio"></i>
-							        </div>
-							        <div class="item-inner">
-							          <div class="item-title">Amber</div>
-							        </div>
-							      </label>
-							    </li>
-							    <li>
-							      <label class="label-radio item-content">
-							        <input type="radio" name="lightcolor" value="blue" v-model="eventcolor">
-							        <div class="item-media">
-							          <i class="icon icon-form-radio"></i>
-							        </div>
-							        <div class="item-inner">
-							          <div class="item-title">Blue</div>
-							        </div>
-							      </label>
-							    </li>
-						    	<li>
-							      <label class="label-radio item-content">
-							        <input type="radio" name="lightcolor" value="orange" v-model="eventcolor">
-							        <div class="item-media">
-							          <i class="icon icon-form-radio"></i>
-							        </div>
-							        <div class="item-inner">
-							          <div class="item-title">Orange</div>
-							        </div>
-							      </label>
-							    </li>
 
-							  </ul>
-			    		</div>
-			    	</div>
+
+		    	<div class="item-content wrap-colors">
+		    		<div class="item-inner">
+		    			<ul class="choose-colors">
+						    <li>
+						      <label class="label-radio item-content">
+						        <input type="radio" name="lightcolor" value="purple" v-model="eventcolor">
+						        <div class="item-media">
+						          <i class="icon icon-form-radio"></i>
+						        </div>
+						        <div class="item-inner">
+						          <div class="item-title">Purple</div>
+						        </div>
+						      </label>
+						    </li>
+						    <li>
+						      <label class="label-radio item-content">
+						        <input type="radio" name="lightcolor" value="pink" v-model="eventcolor">
+						        <div class="item-media">
+						          <i class="icon icon-form-radio"></i>
+						        </div>
+						        <div class="item-inner">
+						          <div class="item-title">Pink</div>
+						        </div>
+						      </label>
+						    </li>
+						    <li>
+						      <label class="label-radio item-content">
+						        <input type="radio" name="lightcolor" value="orange" v-model="eventcolor">
+						        <div class="item-media">
+						          <i class="icon icon-form-radio"></i>
+						        </div>
+						        <div class="item-inner">
+						          <div class="item-title">Orange</div>
+						        </div>
+						      </label>
+						    </li>
+						    <li>
+						      <label class="label-radio item-content">
+						        <input type="radio" name="lightcolor" value="amber" v-model="eventcolor">
+						        <div class="item-media">
+						          <i class="icon icon-form-radio"></i>
+						        </div>
+						        <div class="item-inner">
+						          <div class="item-title">Amber</div>
+						        </div>
+						      </label>
+						    </li>
+						    <li>
+						      <label class="label-radio item-content">
+						        <input type="radio" name="lightcolor" value="blue" v-model="eventcolor">
+						        <div class="item-media">
+						          <i class="icon icon-form-radio"></i>
+						        </div>
+						        <div class="item-inner">
+						          <div class="item-title">Blue</div>
+						        </div>
+						      </label>
+						    </li>
+						    	
+
+					  </ul>
+	    		</div>
+	    	</div>
+
+			    					  COULEUR : {{eventcolor}}
 			    </li>
 				<li class="add-buttons-bonus">
 				<a href="">
@@ -225,6 +229,7 @@ export default {
 		return{
 			eventname: '',
 			eventcolor: '',
+			color: '',
 			progress: '',
 			status: false,
 			daysDiff: '',
@@ -242,7 +247,6 @@ export default {
 			// this.eventDateString = new Date(this.endDate).toLocaleDateString();
 			// this.eventDateSplit = this.eventDateString.split("/");
 			// this.eventDateNew = this.eventDateSplit[2] + "-" + this.eventDateSplit[1] + "-" + this.eventDateSplit[0];
-
 			this.end = new Date(this.endDate).getTime();
 			this.start = new Date().getTime();
 			this.now = new Date().getTime();
@@ -262,6 +266,14 @@ export default {
 				daysDiff: this.diffDays,
 				nextColor: this.nextColor
 			})
+
+			for (var k = 0; k < this.events.length - 1; k++){
+	            this.next = this.events[k+1];
+	            this.nextColor = 'progress-event-deco-'+this.next.color;
+	            this.singleEvent = this.events[k];
+	            this.mainColor = this.singleEvent.color;
+	            ApiFire.ref('events').child(this.singleEvent['.key']).child('nextColor').set(this.nextColor);
+          	};
 		}
 	}
 }  

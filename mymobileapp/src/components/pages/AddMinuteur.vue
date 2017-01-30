@@ -99,8 +99,17 @@ ul.choose-colors{
 			      <div class="item-content">
 			        <div class="item-inner">
 			          <div class="item-input">
-			            <input type="date" placeholder="Date" v-model="endDate"> 
-			            <f7-button round color="pink">Synchroniser</f7-button>
+			            <input type="time" v-model="endDuree"> 
+			            <br>
+			          </div>
+			        </div>
+			      </div>
+			    </li>
+			    <li>
+			      <div class="item-content">
+			        <div class="item-inner">
+			          <div class="item-input">
+			            <input type="datetime-local" placeholder="Date" v-model="endDate"> 
 			            <br>
 			          </div>
 			        </div>
@@ -214,6 +223,8 @@ ul.choose-colors{
 
 <script>  
 
+import ApiFire from '../../api'
+
 export default {
 	data(){
 		return{
@@ -223,8 +234,35 @@ export default {
 			status: false,
 			daysDiff: '',
 			endDate: '',
-			startDate: ''
+			endDateFinal: '',
+			endDuree: '',
+			endDureeFinal: '',
+			startDate: '',
+			nextColor: '',
+			optionsDureeHour: '',
+		    optionsDureeMinutes: '',
+		    optionsStartHour: '',
+		    optionsStartMinutes: ''
 		}
-	}
+	},
+	firebase: {
+		minuteurs: ApiFire.ref('minuteurs')
+	},
+	methods: {
+		addItem () {
+
+			this.today = new Date();
+			this.endDureeSplit = this.endDuree.split(":");
+			this.endDureeHours = this.today.setHours(this.endDureeSplit[0]);
+			this.endDureeMinutes = this.today.setMinutes(this.endDureeSplit[1]);
+
+			this.endDateFinal = new Date(this.endDate).getTime();
+			console.log(this.endDateFinal);
+
+			// this.end = this.endDateFinal;
+			// this.start = new Date().getTime();
+			// this.now = new Date().getTime();
+		}
+	},
 }  
 </script> 

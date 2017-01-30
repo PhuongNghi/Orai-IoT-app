@@ -72,6 +72,12 @@
 .orange{
   color: #E88C3A;
 
+  &.progress-event-deco-orange{
+    &:before{
+       background: linear-gradient(#E88C3A, #E88C3A);
+    }
+  }
+
   &.progress-event-deco-pink{
     &:before{
        background: linear-gradient(#E88C3A, #FF849E);
@@ -106,6 +112,12 @@
     }
   }
 
+  &.progress-event-deco-amber{
+      &:before{
+         background: linear-gradient(#FFAA1A, #FFAA1A);
+      }
+  }
+
   &.progress-event-deco-blue{
     &:before{
        background: linear-gradient(#FFAA1A, #1595E4);
@@ -131,6 +143,12 @@
   &.progress-event-deco-pink{
     &:before{
        background: linear-gradient(#1595E4, #FF849E);
+    }
+  }
+
+  &.progress-event-deco-blue{
+    &:before{
+       background: linear-gradient(#1595E4, #1595E4);
     }
   }
 
@@ -162,6 +180,12 @@
     }
   }
 
+  &.progress-event-deco-purple{
+    &:before{
+       background: linear-gradient(#4F3AE8, #4F3AE8);
+    }
+  }
+
   &.progress-event-deco-blue{
     &:before{
        background: linear-gradient(#4F3AE8, #1595E4);
@@ -187,6 +211,12 @@
   &.progress-event-deco-blue{
     &:before{
        background: linear-gradient(#FF849E, #1595E4);
+    }
+  }
+
+  &.progress-event-deco-pink{
+    &:before{
+       background: linear-gradient(#FF849E, #FF849E);
     }
   }
 
@@ -307,7 +337,6 @@ export default {
       eventdate: '',
       linkEvent: '',
       progress: '',
-      date: '',
       nextColor: ''
     }
   },
@@ -324,13 +353,18 @@ export default {
         }
       }
 
-      this.$http.get(nodeServer).then((response) => {
-        // success 
+
+    this.$http.post(nodeServer, {
+        endDate: this.events[key].endDate, 
+        startDate: this.events[key].startDate, 
+        color: this.events[key].color
+      }).then(response => {
+
         console.log(response);
-        
-      }, (response) => {
-        // error 
-      });
+
+    }, response => {
+      // error callback
+    });
 
     }
   },

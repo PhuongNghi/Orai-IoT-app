@@ -245,15 +245,14 @@
 
   .content-block{
     padding: 0;
-    color: rgba(136, 80, 73, 0.5);
 
-    &.actif-signal{
-      color: #1595E4 !important;
+    &.days-show{
+          color: rgba(136, 80, 73, 0.5) !important;
     }
 
     &.inactif-signal{
       .button{
-        border-color: rgba(136, 80, 73, 0.5);
+        border-color: rgba(197, 149, 143, 0.2);
         /*padding: 0;*/
         color: rgba(136, 80, 73, 0.5);
       }
@@ -315,11 +314,11 @@
         </f7-list-item>
         <f7-list-item class="days-remaining">
 
-          <f7-block>
+          <f7-block class="days-show">
             {{event.daysDiff}} jour<span v-if="event.daysDiff > 1">s</span> restant<span v-if="event.daysDiff > 1">s</span>
           </f7-block>
 
-          <f7-block v-if="event.status" class="actif-signal">
+          <f7-block v-if="event.status" class="actif-signal" :class="event.color">
             Actif
           </f7-block>
 
@@ -371,17 +370,17 @@ export default {
         minuterieRef.child(this.minuteurs[k]['.key']).child('progress').set(0);
       }
 
-    this.$http.post(nodeServer, {
-        endDate: this.events[key].endDate, 
-        startDate: this.events[key].startDate, 
-        color: this.events[key].color
-      }).then(response => {
+    // this.$http.post(nodeServer, {
+    //     endDate: this.events[key].endDate, 
+    //     startDate: this.events[key].startDate, 
+    //     color: this.events[key].color
+    //   }).then(response => {
 
-        console.log(response);
+    //     console.log(response);
 
-    }, response => {
-      // error callback
-    });
+    // }, response => {
+    //   // error callback
+    // });
 
     }
   },
@@ -431,7 +430,7 @@ export default {
         };
       }
 
-      var events = setTimeout(function(){
+      var events = setInterval(function(){
           checkProgress(eventTableau, ref);
       },1500);
 

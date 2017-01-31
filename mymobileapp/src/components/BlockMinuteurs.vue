@@ -18,7 +18,7 @@
               {{event.label}}
             </f7-block>
 
-            <f7-block v-if="event.status" class="actif-signal">
+            <f7-block v-if="event.status" class="actif-signal" :class="event.color">
               Actif
             </f7-block>
 
@@ -116,7 +116,6 @@ export default {
     minutDuree, dureeSplited, 
     dureeMinut = this.dureeMinuterie;
 
-
     setTimeout(function() {
       for (var l = 0; l < minutTableau.length; l++){
         // this.dureeMinuterie = checkDuree(minutTableau[l], dureeMinut);
@@ -124,7 +123,29 @@ export default {
         minutRef.child(minutTableau[l]['.key']).child('label').set(this.dureeMinuterie);
       }
 
-    }, 1500);    
+    }, 1500);  
+
+    var checkProgressAlways = function(minutRef, minutTableau){
+      var now = new Date().getTime();
+
+      for (var k = 0; k < minutTableau.length; k++){
+
+        var progress = Math.round(((now - minutTableau[k].startDate) / (minutTableau[k].endDate - minutTableau[k].startDate)) * 100);
+
+        if(minutTableau[k].status == true){
+          minutRef.child(minutTableau[k]['.key']).child('progress').set(progress);
+        }
+
+        if(now > minutTableau[k].endDate){
+          minutRef.child(minutTableau[k]['.key']).child('progress').set(0);
+          minutRef.child(minutTableau[k]['.key']).child('status').set(false);
+        }
+      } 
+    }
+
+    var minuteurs = setInterval(function(){
+      checkProgressAlways(minutRef, minutTableau);
+    }, 500); 
 
   }  
 }

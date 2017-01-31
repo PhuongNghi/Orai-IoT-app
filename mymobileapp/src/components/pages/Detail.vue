@@ -46,7 +46,32 @@
   .page-content{
     padding-top: 203px;
   }
+
+  .detail-dates{
+    color: rgba(136, 80, 73, 0.5);
+    font-family: "Interstate-Light";
+
+    p:first-child{
+      font-size: 16px;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+      letter-spacing: 0.5px;
+    }
+
+    p:nth-child(2){
+      margin: 0;
+      color: rgba(214, 176, 175, 0.7);
+      letter-spacing: 0.3px;
+    }
+  }
+
+  .progressbar-content{
+    position: relative;
+    top: -10px;
+  }
 }
+
+
 
 </style>
 
@@ -65,27 +90,60 @@
     </f7-nav-right>
   </f7-navbar>
 
-      <f7-block>
-        <p>Jusqu'au {{ dateEventLabel }}</p>
-      
-        <p>crée le {{ dateCreationLabel }}</p>
+      <f7-block class="progressbar-content">
+          <f7-progressbar :progress="progress" :color="color" class="progress-value"></f7-progressbar>
       </f7-block>
-      
 
+      <f7-block v-if="type == 'event'">
+        <div class="detail-dates">
+          <p>Jusqu'au {{ dateEventLabel }}</p>
+        
+          <p>crée le {{ dateCreationLabel }}</p>
+        </div>
+
+        <my-select-color :id="id" :type="'event'"></my-select-color>
+      </f7-block>
+
+      <f7-block v-if="type == 'minut'">
+        <div class="detail-dates">
+          <p>Prévu le {{ dateEventLabel }}</p>
+        
+          <p>crée le {{ dateCreationLabel }}</p>
+        </div>
+
+        <my-select-color :id="id" :type="'minut'"></my-select-color>
+      </f7-block>
+
+      <span v-if="type == 'event'">
+          <my-block-options></my-block-options>
+
+      </span>
+
+      <span v-if="type == 'minut'">
+          <my-block-options></my-block-options>
+      </span>
+      
   </f7-page>
 </template>
 
 <script>
 import ApiFire from '../../api'
+import SelectColor from '../selectcolor'
+import BlockOptions from '../blockoptions'
 
 export default {
-
+  components:{
+    MySelectColor: SelectColor,
+    MyBlockOptions: BlockOptions
+  },
   data () {
     return {
       part1: false,
       part2: false,
       part3: false,
-      navbarStatus: ''
+      navbarStatus: '',
+      id: '',
+      type: ''
     }
   },
   created () {
@@ -134,6 +192,9 @@ export default {
 
         this.dateEventLabel = this.dayEvent + ' ' + this.monthEventFinal + ' ' + this.yearEvent;
 
+        this.progress = this.minuteurs[this.id].progress;
+        this.color = this.minuteurs[this.id].color;
+
       }
 
       if(this.type == 'event'){
@@ -164,6 +225,9 @@ export default {
         this.yearEvent = new Date(this.events[this.id].endDate).getUTCFullYear();
 
         this.dateEventLabel = this.dayEvent + ' ' + this.monthEventFinal + ' ' + this.yearEvent;
+
+        this.progress = this.events[this.id].progress;
+        this.color = this.events[this.id].color;
 
       }
 

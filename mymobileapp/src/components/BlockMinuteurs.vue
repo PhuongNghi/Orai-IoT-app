@@ -77,16 +77,20 @@ export default {
       }
 
       var checkProgress = function(tab, ref, progress, minutKey){
-        for (var j = 0; j < tab.length; j++){
-          now = new Date().getTime();
-          progress = Math.round(((now - tab[j].startDate) / (tab[j].endDate - tab[j].startDate)) * 100);
+        now = new Date().getTime();
 
-          ref.child(tab[j]['.key']).child('progress').set(progress);
+        for (var j = 0; j < tab.length; j++){
+          progress = Math.round(((now - tab[j].startDate) / (tab[j].endDate - tab[j].startDate)) * 100);
+          if (j == key){
+            ref.child(tab[minutKey]['.key']).child('progress').set(progress);
+          } else {
+            ref.child(tab[j]['.key']).child('progress').set(0);
+          }
         }
         
       }
 
-      setInterval(function() {
+      setTimeout(function() {
         checkProgress(minutTableau, minutRef, progress, minutKey);
       }, 500);
 
@@ -137,7 +141,7 @@ export default {
       else if(dureeSplited[0] >= 1 && dureeSplited[0] >= 1) {
         duree = dureeSplited[0] + ' heures et ' + dureeSplited[1] + ' minutes';
       }
-      
+
       return duree;
     }
 

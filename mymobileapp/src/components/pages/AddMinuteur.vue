@@ -245,7 +245,8 @@ export default {
 			eventDuree: '',
 			endDuree: '',
 			progress: 0,
-			type: 'minut'
+			type: 'minut',
+			label: ''
 		}
 	},
 	firebase: {
@@ -285,7 +286,8 @@ export default {
 				nextColor: this.nextColor,
 				status: this.status,
 				progress: this.progress,
-				type: this.type
+				type: this.type,
+				label: this.label
 			});
 
 			for (var k = 0; k < this.minuteurs.length - 1; k++){

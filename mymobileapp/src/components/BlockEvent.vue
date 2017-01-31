@@ -368,6 +368,7 @@ export default {
 
       for(var k = 0; k < this.minuteurs.length; k++){
         minuterieRef.child(this.minuteurs[k]['.key']).child('status').set(false);
+        minuterieRef.child(this.minuteurs[k]['.key']).child('progress').set(0);
       }
 
     // this.$http.post(nodeServer, {

@@ -36,6 +36,16 @@
     top: -44px;
     position: relative;
   }
+  
+  &::after{
+    background-color: transparent;
+  }
+}
+
+.detail-page{
+  .page-content{
+    padding-top: 203px;
+  }
 }
 
 </style>
@@ -54,6 +64,13 @@
       <f7-link icon="icon-bars" open-panel="right"></f7-link>
     </f7-nav-right>
   </f7-navbar>
+
+      <f7-block>
+        <p>Jusqu'au {{ dateEventLabel }}</p>
+      
+        <p>crée le {{ dateCreationLabel }}</p>
+      </f7-block>
+      
 
   </f7-page>
 </template>
@@ -86,6 +103,8 @@ export default {
       this.id = this.$route.params.id;
       this.type = this.$route.params.type;
 
+      this.monthArray = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+
       if(this.type == 'minut'){
         if (this.minuteurs[this.id].progress < 33.3){
           this.part1 = true;
@@ -100,6 +119,21 @@ export default {
           this.part2 = false;
           this.navbarStatus = "part3";
         }
+
+        this.dayCreation = new Date(this.minuteurs[this.id].startDate).getDate();
+        this.monthCreation = new Date(this.minuteurs[this.id].startDate).getMonth();
+        this.monthCreationFinal = this.monthArray[this.monthCreation];
+        this.yearCreation = new Date(this.minuteurs[this.id].startDate).getUTCFullYear();
+
+        this.dateCreationLabel = this.dayCreation + ' ' + this.monthCreationFinal + ' ' + this.yearCreation;
+
+        this.dayEvent = new Date(this.minuteurs[this.id].endDate).getDate();
+        this.monthEvent = new Date(this.minuteurs[this.id].endDate).getMonth();
+        this.monthEventFinal = this.monthArray[this.monthEvent];
+        this.yearEvent = new Date(this.minuteurs[this.id].endDate).getUTCFullYear();
+
+        this.dateEventLabel = this.dayEvent + ' ' + this.monthEventFinal + ' ' + this.yearEvent;
+
       }
 
       if(this.type == 'event'){
@@ -116,7 +150,24 @@ export default {
           this.part2 = false;
           this.navbarStatus = "part3";
         }
+
+        this.dayCreation = new Date(this.events[this.id].startDate).getDate();
+        this.monthCreation = new Date(this.events[this.id].startDate).getMonth();
+        this.monthCreationFinal = this.monthArray[this.monthCreation];
+        this.yearCreation = new Date(this.events[this.id].startDate).getUTCFullYear();
+
+        this.dateCreationLabel = this.dayCreation + ' ' + this.monthCreationFinal + ' ' + this.yearCreation;
+
+        this.dayEvent = new Date(this.events[this.id].endDate).getDate();
+        this.monthEvent = new Date(this.events[this.id].endDate).getMonth();
+        this.monthEventFinal = this.monthArray[this.monthEvent];
+        this.yearEvent = new Date(this.events[this.id].endDate).getUTCFullYear();
+
+        this.dateEventLabel = this.dayEvent + ' ' + this.monthEventFinal + ' ' + this.yearEvent;
+
       }
+
+      
       
     }
   }

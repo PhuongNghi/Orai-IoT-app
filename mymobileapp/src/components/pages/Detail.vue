@@ -20,6 +20,22 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
+
+  .title-detail{
+    color: #FFFBF9;
+    font-family: "Grifo-M-Bold";
+    font-size: 33px;
+    line-height: 33px;
+    text-align: center;
+    letter-spacing: 2.5px;
+    position: relative;
+    top: 44px;
+  }
+
+  .left, .right{
+    top: -44px;
+    position: relative;
+  }
 }
 
 </style>
@@ -27,11 +43,11 @@
 <template>  
   <f7-page class="detail-page">
     <f7-navbar title="" back-link="Back" sliding class="detail-navbar" :class="navbarStatus">
-      <div v-if="type == 'event'">
+      <div v-if="type == 'event'" class="title-detail">
         {{ events[id].name }}
       </div>
 
-      <div v-if="type == 'minut'">
+      <div v-if="type == 'minut'" class="title-detail">
         {{ minuteurs[id].name }}
       </div>
     <f7-nav-right>

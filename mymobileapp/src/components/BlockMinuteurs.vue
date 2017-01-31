@@ -36,6 +36,7 @@
 <script>
 import ApiFire from '../api'
 import Vue from 'vue'
+import DureeMinut from '../checkDureeMinute'
 
 var minuterieRef = ApiFire.ref('minuteurs');
 var eventsRef = ApiFire.ref('events');
@@ -115,39 +116,11 @@ export default {
     minutDuree, dureeSplited, 
     dureeMinut = this.dureeMinuterie;
 
-    var checkDuree = function(tab, duree){
-
-      minutDuree = tab.eventDuree;
-      dureeSplited = minutDuree.split(':');
-
-      if(dureeSplited[0] == 1){
-        duree = dureeSplited[0] + ' heure';
-      } 
-      else if(dureeSplited[0] > 1) {
-        duree = dureeSplited[0] + ' heures';
-      }
-      else if(dureeSplited[1] >= 1) {
-        duree = dureeSplited[1] + ' minutes';
-      }
-      else if(dureeSplited[0] == 1 && dureeSplited[0] == 1) {
-        duree = dureeSplited[0] + ' heure et ' + dureeSplited[1] + ' minute';
-      }
-      else if(dureeSplited[0] == 1 && dureeSplited[0] > 1) {
-        duree = dureeSplited[0] + ' heure et ' + dureeSplited[1] + ' minutes';
-      }
-      else if(dureeSplited[0] > 1 && dureeSplited[0] == 1) {
-        duree = dureeSplited[0] + ' heures et ' + dureeSplited[1] + ' minute';
-      }
-      else if(dureeSplited[0] >= 1 && dureeSplited[0] >= 1) {
-        duree = dureeSplited[0] + ' heures et ' + dureeSplited[1] + ' minutes';
-      }
-
-      return duree;
-    }
 
     setTimeout(function() {
       for (var l = 0; l < minutTableau.length; l++){
-        this.dureeMinuterie = checkDuree(minutTableau[l], dureeMinut);
+        // this.dureeMinuterie = checkDuree(minutTableau[l], dureeMinut);
+        this.dureeMinuterie = DureeMinut(minutTableau[l].eventDuree);
         minutRef.child(minutTableau[l]['.key']).child('label').set(this.dureeMinuterie);
       }
 

@@ -230,6 +230,7 @@ ul.choose-colors{
 <script>  
 
 import ApiFire from '../../api'
+import DureeMinut from '../../checkDureeMinute'
 var minuterieRef = ApiFire.ref('minuteurs');
 
 export default {
@@ -276,6 +277,8 @@ export default {
 				this.endDateFinalMinutes = (this.now + this.endDureeMinutes * 60000);
 				this.endDateFinal = (this.endDateFinalMinutes + this.endDureeHours*60*60*1000);
 			}
+
+		    this.label = DureeMinut(this.endDuree);
 
 			this.$firebaseRefs.minuteurs.push({
 				name: this.eventname,

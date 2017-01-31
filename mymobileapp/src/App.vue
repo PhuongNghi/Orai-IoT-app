@@ -185,7 +185,7 @@
     z-index: 100;
     position: relative;
     bottom: 0;
-    margin-top: 426px;
+    margin-top: 422px;
 }
 
 .add-button, .close-login{

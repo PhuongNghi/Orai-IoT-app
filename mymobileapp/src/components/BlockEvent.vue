@@ -245,7 +245,19 @@
 
   .content-block{
     padding: 0;
-    color: rgba(136, 80, 73, 0.5) !important;
+    color: rgba(136, 80, 73, 0.5);
+
+    &.actif-signal{
+      color: #1595E4 !important;
+    }
+
+    &.inactif-signal{
+      .button{
+        border-color: rgba(136, 80, 73, 0.5);
+        /*padding: 0;*/
+        color: rgba(136, 80, 73, 0.5);
+      }
+    }
   }
 
   .item-inner{
@@ -295,7 +307,7 @@
 
   <div>
     <f7-list-group class="progress-event" v-for="event, key in events" :class="[event.color, event.nextColor]">
-      <f7-link :href="'/detail/'+key" :class="event.color">
+      <f7-link :href="'/detail/'+event.type+'/'+key" :class="event.color">
         <f7-block class="progressbar-content">
             <f7-progressbar :progress="event.progress" :color="event.color" class="progress-value"></f7-progressbar>
         </f7-block>
@@ -307,11 +319,11 @@
             {{event.daysDiff}} jour<span v-if="event.daysDiff > 1">s</span> restant<span v-if="event.daysDiff > 1">s</span>
           </f7-block>
 
-          <f7-block v-if="event.status">
+          <f7-block v-if="event.status" class="actif-signal">
             Actif
           </f7-block>
 
-          <f7-block v-if="!event.status">
+          <f7-block v-if="!event.status" class="inactif-signal">
             <f7-button class="btn-send-to-sablier" @click="sendSablier(event, key)">Activer</f7-button>
           </f7-block>
 
@@ -326,6 +338,7 @@
 import ApiFire from '../api'
 import Vue from 'vue'
 
+var minuterieRef = ApiFire.ref('minuteurs');
 var eventsRef = ApiFire.ref('events');
 var nodeServer = 'http://orai.kevinmoutier.com/set';
 
@@ -340,7 +353,8 @@ export default {
     }
   },
   firebase: {
-      events: eventsRef
+      events: eventsRef,
+      minuteurs: minuterieRef
   },
   methods: {
     sendSablier: function(event, key){
@@ -352,17 +366,21 @@ export default {
         }
       }
 
-    this.$http.post(nodeServer, {
-        endDate: this.events[key].endDate, 
-        startDate: this.events[key].startDate, 
-        color: this.events[key].color
-      }).then(response => {
+      for(var k = 0; k < this.minuteurs.length; k++){
+        minuterieRef.child(this.minuteurs[k]['.key']).child('status').set(false);
+      }
 
-        console.log(response);
+    // this.$http.post(nodeServer, {
+    //     endDate: this.events[key].endDate, 
+    //     startDate: this.events[key].startDate, 
+    //     color: this.events[key].color
+    //   }).then(response => {
 
-    }, response => {
-      // error callback
-    });
+    //     console.log(response);
+
+    // }, response => {
+    //   // error callback
+    // });
 
     }
   },
@@ -377,39 +395,39 @@ export default {
 
       var checkProgress = function(events, ref){
 
-          dateStartNew = new Date().toLocaleDateString();
-          dateStartNewSplit = dateStartNew.split("/");
-          dateStartNewFinal = dateStartNewSplit[2] + "-" + dateStartNewSplit[1] + "-" + dateStartNewSplit[0];
+        dateStartNew = new Date().toLocaleDateString();
+        dateStartNewSplit = dateStartNew.split("/");
+        dateStartNewFinal = dateStartNewSplit[2] + "-" + dateStartNewSplit[1] + "-" + dateStartNewSplit[0];
 
-          for (var k = 0; k < events.length - 1; k++){
-            next = events[k+1];
-            nextColor = 'progress-event-deco-'+next.color;
-            singleEvent = events[k];
-            mainColor = singleEvent.color;
-            ref.child(singleEvent['.key']).child('nextColor').set(nextColor);
-          };
+        for (var k = 0; k < events.length - 1; k++){
+          next = events[k+1];
+          nextColor = 'progress-event-deco-'+next.color;
+          singleEvent = events[k];
+          mainColor = singleEvent.color;
+          ref.child(singleEvent['.key']).child('nextColor').set(nextColor);
+        };
 
-          for (var i = 0; i < events.length; i++) {
-            singleEvent = events[i];
-            
-            // dateTodayTest = "2017-01-25";
-            dateStart = new Date(events[i].startDate).getTime();
-            dateEnd = new Date(events[i].endDate).getTime();
-            dateToday = new Date().getTime();
+        for (var i = 0; i < events.length; i++) {
+          singleEvent = events[i];
+          
+          // dateTodayTest = "2017-01-25";
+          dateStart = new Date(events[i].startDate).getTime();
+          dateEnd = new Date(events[i].endDate).getTime();
+          dateToday = new Date().getTime();
 
-            newProgress = ((dateToday - dateStart) / (dateEnd - dateStart)) * 100;
+          newProgress = ((dateToday - dateStart) / (dateEnd - dateStart)) * 100;
 
-            newTimeDiff = Math.abs(dateEnd - dateToday);
-            newDaysDiff = Math.ceil(newTimeDiff / (1000 * 3600 * 24)); 
+          newTimeDiff = Math.abs(dateEnd - dateToday);
+          newDaysDiff = Math.ceil(newTimeDiff / (1000 * 3600 * 24)); 
 
-            ref.child(singleEvent['.key']).child('progress').set(newProgress);
-            ref.child(singleEvent['.key']).child('daysDiff').set(newDaysDiff);         
+          ref.child(singleEvent['.key']).child('progress').set(newProgress);
+          ref.child(singleEvent['.key']).child('daysDiff').set(newDaysDiff);         
 
-            // Remove event if J-0
-            if(dateToday > dateEnd){
-              ref.child(singleEvent['.key']).remove();
-            }
-          };
+          // Remove event if J-0
+          if(dateToday > dateEnd){
+            ref.child(singleEvent['.key']).remove();
+          }
+        };
       }
 
       var events = setTimeout(function(){

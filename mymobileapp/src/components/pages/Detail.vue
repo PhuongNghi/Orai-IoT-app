@@ -10,8 +10,12 @@
       </f7-nav-right>
     </f7-navbar>
 
-    <div>
+    <div v-if="type == 'event'">
       {{ events[id].name }}
+    </div>
+
+    <div v-if="type == 'minut'">
+      {{ minuteurs[id].name }}
     </div>
 
   </f7-page>
@@ -29,7 +33,8 @@ export default {
       eventcolor: '',
       progress: '',
       status: false,
-      daysDiff: ''
+      daysDiff: '',
+
     }
   },
   created () {
@@ -40,12 +45,12 @@ export default {
   },
   firebase: {
       events: ApiFire.ref('events'),
-      minuterie: ApiFire.ref('minuterie'),
+      minuteurs: ApiFire.ref('minuteurs'),
   },
   methods: {
     fetchData () {
-      // console.log(this.$route.params.id);
       this.id = this.$route.params.id;
+      this.type = this.$route.params.type;
     }
   }
 

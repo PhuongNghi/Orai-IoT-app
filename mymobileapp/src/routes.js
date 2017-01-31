@@ -21,7 +21,7 @@ export default [
     component: require('./components/pages/infos.vue')
   },
     {
-    path: '/detail/:id',
+    path: '/detail/:type/:id',
     component: require('./components/pages/detail.vue')
   }
 ]

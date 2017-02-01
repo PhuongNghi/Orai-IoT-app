@@ -131,7 +131,48 @@ ul.add-minut{
 				  </ul>
 				</div>      
 			</form>	
-			<my-select-color></my-select-color>
+				<div class="item-content wrap-colors">
+	      <div class="item-inner">
+	        <ul class="choose-colors">
+	          <li>
+	            <label class="label-radio item-content">
+	              <input type="radio" name="lightcolor" value="purple" id="purple" v-model="checked">
+	              <div class="item-inner"></div>
+	              <div class="item-title purple"></div>
+	            </label>
+	          </li>
+	          <li>
+	            <label class="label-radio item-content">
+	              <input type="radio" name="lightcolor" value="pink" id="pink" v-model="checked">
+	              <div class="item-inner"></div>
+	              <div class="item-title pink"></div>
+	            </label>
+	          </li>
+	          <li>
+	            <label class="label-radio item-content">
+	              <input type="radio" name="lightcolor" value="orange" id="orange" v-model="checked">
+	              <div class="item-inner"></div>
+	              <div class="item-title orange"></div>
+	            </label>
+	          </li>
+	          <li>
+	            <label class="label-radio item-content">
+	              <input type="radio" name="lightcolor" value="amber" id="amber" v-model="checked">
+	              <div class="item-inner"></div>
+	              <div class="item-title amber"></div>
+	            </label>
+	          </li>
+	          <li>
+	            <label class="label-radio item-content">
+	              <input type="radio" name="lightcolor" value="blue" id="blue" v-model="checked">
+	              <div class="item-inner"></div>
+	              <div class="item-title blue"></div>
+	            </label>
+	          </li>
+	      </ul>
+	    </div>
+
+  	</div>
 		</f7-block>	
 
 		<my-block-options></my-block-options>
@@ -139,6 +180,8 @@ ul.add-minut{
 		<f7-button class="add-button back" @click="addItem">
 	     	<span>Valider et envoyer</span>
 		</f7-button>
+
+		COULEUR : {{this.checked}}
 
 	</f7-page>
 </template>
@@ -170,7 +213,8 @@ export default {
 			endDuree: '',
 			progress: 0,
 			type: 'minut',
-			label: ''
+			label: '',
+			checked: '',
 		}
 	},
 	firebase: {
@@ -205,7 +249,7 @@ export default {
 
 			this.$firebaseRefs.minuteurs.push({
 				name: this.eventname,
-				color: this.eventcolor,
+				color: this.checked,
 				startDate: this.now,
 				eventDuree: this.endDuree,
 				endDate: this.endDateFinal,

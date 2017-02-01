@@ -370,17 +370,17 @@ export default {
         minuterieRef.child(this.minuteurs[k]['.key']).child('progress').set(0);
       }
 
-    // this.$http.post(nodeServer, {
-    //     endDate: this.events[key].endDate, 
-    //     startDate: this.events[key].startDate, 
-    //     color: this.events[key].color
-    //   }).then(response => {
+    this.$http.post(nodeServer, {
+        endDate: this.events[key].endDate, 
+        startDate: this.events[key].startDate, 
+        color: this.events[key].color
+      }).then(response => {
 
-    //     console.log(response);
+        console.log(response);
 
-    // }, response => {
-    //   // error callback
-    // });
+    }, response => {
+      // error callback
+    });
 
     }
   },

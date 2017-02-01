@@ -240,7 +240,48 @@ ul.create-form{
 			</ul>
 
 		</form>		
-		<my-select-color></my-select-color>
+		<div class="item-content wrap-colors">
+	      <div class="item-inner">
+	        <ul class="choose-colors">
+	          <li>
+	            <label class="label-radio item-content">
+	              <input type="radio" name="lightcolor" value="purple" id="purple" v-model="checked">
+	              <div class="item-inner"></div>
+	              <div class="item-title purple"></div>
+	            </label>
+	          </li>
+	          <li>
+	            <label class="label-radio item-content">
+	              <input type="radio" name="lightcolor" value="pink" id="pink" v-model="checked">
+	              <div class="item-inner"></div>
+	              <div class="item-title pink"></div>
+	            </label>
+	          </li>
+	          <li>
+	            <label class="label-radio item-content">
+	              <input type="radio" name="lightcolor" value="orange" id="orange" v-model="checked">
+	              <div class="item-inner"></div>
+	              <div class="item-title orange"></div>
+	            </label>
+	          </li>
+	          <li>
+	            <label class="label-radio item-content">
+	              <input type="radio" name="lightcolor" value="amber" id="amber" v-model="checked">
+	              <div class="item-inner"></div>
+	              <div class="item-title amber"></div>
+	            </label>
+	          </li>
+	          <li>
+	            <label class="label-radio item-content">
+	              <input type="radio" name="lightcolor" value="blue" id="blue" v-model="checked">
+	              <div class="item-inner"></div>
+	              <div class="item-title blue"></div>
+	            </label>
+	          </li>
+	      </ul>
+	    </div>
+
+  	</div>
     </f7-block>
 		
 	<my-block-options></my-block-options>

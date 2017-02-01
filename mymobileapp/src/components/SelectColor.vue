@@ -89,35 +89,35 @@ ul.choose-colors{
         <ul class="choose-colors">
           <li>
             <label class="label-radio item-content">
-              <input type="radio" name="lightcolor" value="purple" id="purple" v-model="checked">
+              <input type="radio" name="lightcolor" value="purple" id="purple" v-model="checked" @click="updateColor">
               <div class="item-inner"></div>
               <div class="item-title purple"></div>
             </label>
           </li>
           <li>
             <label class="label-radio item-content">
-              <input type="radio" name="lightcolor" value="pink" id="pink" v-model="checked">
+              <input type="radio" name="lightcolor" value="pink" id="pink" v-model="checked" @click="updateColor">
               <div class="item-inner"></div>
               <div class="item-title pink"></div>
             </label>
           </li>
           <li>
             <label class="label-radio item-content">
-              <input type="radio" name="lightcolor" value="orange" id="orange" v-model="checked">
+              <input type="radio" name="lightcolor" value="orange" id="orange" v-model="checked" @click="updateColor">
               <div class="item-inner"></div>
               <div class="item-title orange"></div>
             </label>
           </li>
           <li>
             <label class="label-radio item-content">
-              <input type="radio" name="lightcolor" value="amber" id="amber" v-model="checked">
+              <input type="radio" name="lightcolor" value="amber" id="amber" v-model="checked" @click="updateColor">
               <div class="item-inner"></div>
               <div class="item-title amber"></div>
             </label>
           </li>
           <li>
             <label class="label-radio item-content">
-              <input type="radio" name="lightcolor" value="blue" id="blue" v-model="checked">
+              <input type="radio" name="lightcolor" value="blue" id="blue" v-model="checked" @click="updateColor">
               <div class="item-inner"></div>
               <div class="item-title blue"></div>
             </label>
@@ -136,6 +136,7 @@ import Vue from 'vue'
 
 var minuterieRef = ApiFire.ref('minuteurs');
 var eventsRef = ApiFire.ref('events');
+var nodeServer = 'http://orai.kevinmoutier.com/updateColor';
 
 export default {
   props: ['id', 'type'],
@@ -149,7 +150,31 @@ export default {
       minuteurs: minuterieRef
   },
   methods: {
+    updateColor(){
+      // console.log(this.events[this.id].status);
 
+      if(this.type == 'event'){
+        if(this.events[this.id].status){
+          console.log(this.checked);
+          eventsRef.child(this.events[this.id]['.key']).child('color').set(this.checked);
+
+          this.$http.put(nodeServer, { 
+              color: this.checked
+            }).then(response => {
+
+              console.log(response);
+
+          }, response => {
+            // error callback
+          });
+        }
+
+      } else if (this.type == 'minut'){
+       
+      }
+
+      
+    }  
   },
   created(){      
     if(this.type == 'event'){
@@ -160,7 +185,8 @@ export default {
       this.checked = this.mainColor;
     }
 
-  }  
+  }
+  
 }
 
 </script>

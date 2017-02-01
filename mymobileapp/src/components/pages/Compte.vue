@@ -18,7 +18,7 @@
   }
 
   .header-title-createEvent{
-    top: 143px !important;
+    top: 194px !important;
     border: none;
     background-color: rgba(255, 240, 222, 0.6);
     height: 51px;
@@ -51,7 +51,7 @@
   }
 
   .compte-main-wrap{
-    padding-top: 157px;
+   padding-top: 205px;
 
     h1{
       font-size: 24px;

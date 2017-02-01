@@ -307,8 +307,10 @@ i.icon.icon-bars{
       height: 202px;
 
       &.menu-compte-wrap{
+
         a.item-link{
           padding-top: 10px;
+
         }
       }
 
@@ -381,6 +383,12 @@ i.icon.icon-bars{
       width: 30px;
     }
   }
+}
+
+
+.layout-dark .item-link.active-state{
+    background-color: transparent !important;
+
 }
 
 </style>

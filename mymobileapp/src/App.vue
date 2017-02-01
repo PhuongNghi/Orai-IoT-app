@@ -69,8 +69,24 @@
   }
 }
 
+i.icon.icon-back{
+  background-image: url(assets/icon/arrow.svg) !important;
+}
+
+i.icon.icon-bars{
+  background-image: url(assets/icon/burger-menu.svg) !important;
+  width: 30px;
+  height: 30px;
+}
+
 .page{
   background: none;
+}
+
+.navbar{
+  .right{
+    right: 3px;
+  }
 }
 
 .content-block{
@@ -202,6 +218,7 @@
     line-height: 55px;
     font-size: 21px;
     color: white !important;
+    letter-spacing: 0.9px;
 }
 
 .close-login{
@@ -266,6 +283,106 @@
   display: block !important;
 }
 
+.main-menu{
+  .page-content{
+    padding-top: 0 !important;
+    overflow: hidden;
+  }
+}
+
+.menu-list{
+  position: relative;
+  top: 5px;
+
+  ul{
+    background: -webkit-linear-gradient(#FF8E70, #F05F6A) !important;
+    background: linear-gradient(#FF8E70, #F05F6A) !important;
+    top: -5px;
+
+    &::after, &::before{
+      content: none !important;
+    }
+
+    li{
+      height: 202px;
+
+      &.menu-compte-wrap{
+        a.item-link{
+          padding-top: 10px;
+        }
+      }
+
+      a{
+        height: 202px;
+        -webkit-align-items: center;
+        -webkit-box-align: center;
+        justify-content: center;
+        display: flex;
+        color: white !important;
+        font-family: 'Grifo-M-Bold';
+        letter-spacing: 1px;
+        font-size: 18px;
+
+        &.menu-link{
+          &::before{
+            content: '';
+            width: 61px;
+            height: 71px;
+            background-repeat: no-repeat;
+            position: absolute;
+            background-size: 48px;
+            background-position-x: 6px;
+          }
+
+          &.compte::before{
+              background-image: url('assets/icon/myaccount.svg');
+              top: 55px;
+          }
+          &.infos::before{
+              background-image: url('assets/icon/infos.svg');
+              top: 45px;
+          }
+          &.veille::before{
+              background-image: url('assets/icon/veille.svg');
+              top: 75px;
+          }
+        }
+
+      }
+
+      &:first-child{ 
+        background: -webkit-linear-gradient(rgba(239, 90, 96, 0.3), rgba(255, 184, 131, 0.3)) !important;
+        background: linear-gradient(rgba(239, 90, 96, 0.3), rgba(255, 184, 131, 0.3)) !important;
+      }
+      &:nth-child(3){ 
+        background: -webkit-linear-gradient(rgba(229, 80, 86, 0.3), rgba(240, 95, 106, 0.3)) !important;
+        background: linear-gradient(rgba(229, 80, 86, 0.3), rgba(240, 95, 106, 0.3)) !important;
+      }
+    }
+  }
+
+  .item-content{
+    padding: 0;
+  }
+
+  .item-inner{
+    padding-top: 30px;
+    background-image: none !important;
+    padding-right: 0 !important;
+  }
+
+  .menu-close{
+    position: absolute;
+    top: 25px;
+    right: 25px;
+    height: initial;
+
+    img{
+      width: 30px;
+    }
+  }
+}
+
 </style>
 
 <template>
@@ -322,20 +439,23 @@
     <f7-statusbar></f7-statusbar>
 
     <!-- Right Panel -->
-    <f7-panel right reveal layout="dark">
+    <f7-panel right reveal layout="dark" class="main-menu">
       <f7-view id="right-panel-view" navbar-through :dynamic-navbar="true">
-        <f7-navbar title="Menu"></f7-navbar>
+        <!-- <f7-navbar title="Menu"></f7-navbar> -->
         <f7-pages>
           <f7-page>
-            <f7-list>
-              <f7-list-item link="#">
-                <a href="/compte/" data-view=".main-view" class="menu-link close-panel">Mon Compte</a>
+            <f7-list class="menu-list">
+              <f7-list-item link="#" class="menu-compte-wrap">
+                <a class="menu-close close-panel">
+                  <img src="./assets/icon/close.svg" alt="">
+                </a>
+                <a href="/compte/" data-view=".main-view" class="menu-link compte close-panel">Mon Compte</a>
               </f7-list-item>
               <f7-list-item link="#">
-                <a href="/infos/" data-view=".main-view" class="menu-link close-panel">Informations</a>
+                <a href="/infos/" data-view=".main-view" class="menu-link infos close-panel">Informations</a>
               </f7-list-item>
               <f7-list-item link="#">
-                <a href="/veille/" data-view=".main-view" class="menu-link close-panel">Mettre en veille</a>
+                <a href="/veille/" data-view=".main-view" class="menu-link veille close-panel">Mettre en veille</a>
               </f7-list-item>
             </f7-list>
           </f7-page>

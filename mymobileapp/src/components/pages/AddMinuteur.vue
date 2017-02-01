@@ -1,35 +1,4 @@
 <style lang="scss">
-input[type='text'], input[type='email']{
-	border-bottom: #ff2d55 solid 1px !important;
-	color: #ff2d55;
-}
-
-input[type='date']{
-	color: #ff2d55 !important;
-}
-
-*::-webkit-input-placeholder {
-    color: #ff2d55;
-}
-
-*:-moz-placeholder {
-    /* FF 4-18 */
-    color: #ff2d55;
-}
-
-*::-moz-placeholder {
-    /* FF 19+ */
-    color: #ff2d55;
-}
-
-*:-ms-input-placeholder {
-    /* IE 10+ */
-    color: #ff2d55;
-}
-
-ul.choose-colors{
-	display: inherit;
-}
 
 .add-buttons-bonus {
     
@@ -73,6 +42,47 @@ ul.choose-colors{
 	}
 }
 
+ul.add-minut{
+	li:nth-child(2){
+		input{
+			margin-top: 15px;
+		}
+	}
+
+	input, input[type='text'], input[type='email']{
+	    border-bottom: rgba(153, 62, 62, 0.5) solid 1px !important;
+	    color: #9B3C80;
+	    font-family: "Interstate-Light";
+	    letter-spacing: 1px;
+	    transition: all .15s linear;
+
+	    &.focus-state{
+	      border-bottom: #86D3D7 solid 1px !important;
+	    } 
+	  }
+
+	  ::-webkit-input-placeholder{
+	    font-size: 17px !important;
+	    color: rgba(153, 62, 62, 0.5);
+	    font-family: "Interstate-Light";
+  	}
+
+	.duree-input{
+		width: 50px !important;
+	}
+
+	.lancementdate-input{
+		width: 80px !important;
+		margin-top: -8px;
+
+		input{
+			width: 100vw;
+		    margin-left: -44px;
+		    margin-top: 19px;
+		}
+	}
+}
+
 </style>
 
 <template>  
@@ -81,148 +91,54 @@ ul.choose-colors{
     	<f7-nav-right>
 		    <f7-link icon="icon-bars" open-panel="right"></f7-link>
 	    </f7-nav-right>
+	    <f7-subnavbar class="header-title-createEvent">
+			<f7-block class="header-title-content">CREATION D'UN NOUVEAU MINUTEUR</f7-block>
+    	</f7-subnavbar>
     </f7-navbar>
 
-            <form id="createEvent">
-			<div class="list-block">
-			  <ul>
-			    <li>
-			      <div class="item-content">
-			        <div class="item-inner">
-			          <div class="item-input">
-			            <input type="text" placeholder="Nom du minuteur" v-model="eventname">
-			          </div>
-			        </div>
-			      </div>
-			    </li>
-			    <li>
-			      <div class="item-content">
-			        <div class="item-inner">
-			          <div class="item-input">
-			            <input type="time" v-model="endDuree"> 
-			            <br>
-			          </div>
-			        </div>
-			      </div>
-			    </li>
-			    <li>
-			      <div class="item-content">
-			        <div class="item-inner">
-			          <div class="item-input">
-			            <input type="datetime-local" placeholder="Date" v-model="endDate"> 
-			            <br>
-			          </div>
-			        </div>
-			      </div>
-			    </li>
-			    <li>
-			    	<div class="item-content wrap-colors">
-			    		<div class="item-inner">
-			    			<ul class="choose-colors">
-							    <li>
-							      <label class="label-radio item-content">
-							        <input type="radio" name="lightcolor" value="purple" v-model="eventcolor">
-							        <div class="item-media">
-							          <i class="icon icon-form-radio"></i>
-							        </div>
-							        <div class="item-inner">
-							          <div class="item-title">Purple</div>
-							        </div>
-							      </label>
-							    </li>
-							    <li>
-							      <label class="label-radio item-content">
-							        <input type="radio" name="lightcolor" value="pink" v-model="eventcolor">
-							        <div class="item-media">
-							          <i class="icon icon-form-radio"></i>
-							        </div>
-							        <div class="item-inner">
-							          <div class="item-title">Pink</div>
-							        </div>
-							      </label>
-							    </li>
-							    <li>
-							      <label class="label-radio item-content">
-							        <input type="radio" name="lightcolor" value="amber" v-model="eventcolor">
-							        <div class="item-media">
-							          <i class="icon icon-form-radio"></i>
-							        </div>
-							        <div class="item-inner">
-							          <div class="item-title">Amber</div>
-							        </div>
-							      </label>
-							    </li>
-							    <li>
-							      <label class="label-radio item-content">
-							        <input type="radio" name="lightcolor" value="blue" v-model="eventcolor">
-							        <div class="item-media">
-							          <i class="icon icon-form-radio"></i>
-							        </div>
-							        <div class="item-inner">
-							          <div class="item-title">Blue</div>
-							        </div>
-							      </label>
-							    </li>
-						    	<li>
-							      <label class="label-radio item-content">
-							        <input type="radio" name="lightcolor" value="orange" v-model="eventcolor">
-							        <div class="item-media">
-							          <i class="icon icon-form-radio"></i>
-							        </div>
-							        <div class="item-inner">
-							          <div class="item-title">Orange</div>
-							        </div>
-							      </label>
-							    </li>
+		<f7-block class="add-minut-wrap">
+	        <form id="createEvent">
+				<div class="list-block">
+				  <ul class="add-minut">
+				    <li>
+				      <div class="item-content">
+				        <div class="item-inner">
+				          <div class="item-input">
+				            <input type="text" placeholder="Nom du minuteur" v-model="eventname">
+				          </div>
+				        </div>
+				      </div>
+				    </li>
+				    <li>
+				      <div class="item-content">
+				        <div class="item-inner">
+				          <div class="item-input duree-input">
+				            <input type="text" onfocus="(this.type='time')" placeholder="Durée" v-model="endDuree"> 
+				            <br>
+				          </div>
 
+				          <div class="item-input lancementdate-input">
+				            <input type="text" onfocus="(this.type='datetime-local')" placeholder="Lancement automatique" v-model="endDate"> 
+				            <br>
+				          </div>
+				          <div class="item-input lancementdate-input">
+				            
+				          </div>
+				        </div>
+				      </div>
+				    </li>
 
-							  </ul>
+				  </ul>
+				</div>      
+			</form>	
+			<my-select-color></my-select-color>
+		</f7-block>	
 
+		<my-block-options></my-block-options>
 
-			    		</div>
-			    	</div>
-
-			    							 COULEUR : {{eventcolor}}
-
-			    </li>
-				<li class="add-buttons-bonus">
-				<a href="">
-					<div class="item-content">
-							<div class="item-media"><f7-icon f7="bell"></f7-icon></div>
-							<div class="item-inner">
-								<div class="item-title">Choisir une annonce de fin</div>
-							</div>
-						
-					</div>
-				</a>
-				<a href="">
-					<div class="item-content">
-							<div class="item-media"><f7-icon f7="compose"></f7-icon></div>
-							<div class="item-inner">
-								<div class="item-title">Ajouter une note</div>
-							</div>
-						
-					</div>
-				</a>
-				<a href="">
-					<div class="item-content">
-							<div class="item-media"><f7-icon f7="person"></f7-icon></div>
-							<div class="item-inner">
-								<div class="item-title">Inviter quelqu'un</div>
-							</div>
-						
-					</div>
-				</a>	
-
-				</li>
-				<li class="add-btn-valid">
-					<a href="">
-						<f7-button round color="pink" type="submit" @click="addItem">Valider</f7-button>
-					</a>
-				</li>
-			  </ul>
-			</div>      
-		</form>		
+		<f7-button class="add-button back" @click="addItem">
+	     	<span>Valider et envoyer</span>
+		</f7-button>
 
 	</f7-page>
 </template>
@@ -231,9 +147,16 @@ ul.choose-colors{
 
 import ApiFire from '../../api'
 import DureeMinut from '../../checkDureeMinute'
+import SelectColor from '../selectcolor'
+import BlockOptions from '../blockoptions'
+
 var minuterieRef = ApiFire.ref('minuteurs');
 
 export default {
+	components: {
+		MySelectColor: SelectColor,
+		MyBlockOptions: BlockOptions
+	},
 	data(){
 		return{
 			eventname: '',

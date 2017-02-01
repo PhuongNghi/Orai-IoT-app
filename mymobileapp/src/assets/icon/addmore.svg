@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="55px" height="55px" viewBox="0 0 55 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Page 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <polygon id="path-1" points="0 54.1288025 0 0.0591174908 54.2266387 0.0591174908 54.2266387 54.1288025 2.76314846e-15 54.1288025"></polygon>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" opacity="0.900000036">
+        <g id="Nouvel-evenement-Copy-7" transform="translate(-649.000000, -534.000000)">
+            <g id="Group-9" transform="translate(42.000000, 512.000000)">
+                <g id="Group-6" transform="translate(409.574563, 0.000000)">
+                    <g id="Page-1" opacity="0.15" transform="translate(198.142857, 22.619048)">
+                        <g id="Group-3" transform="translate(0.000000, 0.097688)">
+                            <mask id="mask-2" fill="white">
+                                <use xlink:href="#path-1"></use>
+                            </mask>
+                            <g id="Clip-2"></g>
+                            <path d="M54.2266387,27.09396 C54.2266387,42.0251065 42.0879272,54.1288025 27.1135854,54.1288025 C12.1392437,54.1288025 -0.000532212885,42.0251065 -0.000532212885,27.09396 C-0.000532212885,12.1628135 12.1392437,0.0591174908 27.1135854,0.0591174908 C42.0879272,0.0591174908 54.2266387,12.1628135 54.2266387,27.09396" id="Fill-1" fill="#1D1D1B" mask="url(#mask-2)"></path>
+                        </g>
+                        <g id="Group-7" transform="translate(26.610644, 12.833952)">
+                            <path d="M0.502728291,0.412654945 L0.502728291,28.3029498" id="Fill-4" fill="#FFFFFF"></path>
+                            <path d="M0.502728291,0.412654945 L0.502728291,28.3029498" id="Stroke-6" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"></path>
+                        </g>
+                        <g id="Group-11" transform="translate(12.773109, 26.631571)">
+                            <path d="M28.5966499,0.560077198 L0.0838767507,0.560077198" id="Fill-8" fill="#FFFFFF"></path>
+                            <path d="M28.5966499,0.560077198 L0.0838767507,0.560077198" id="Stroke-10" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

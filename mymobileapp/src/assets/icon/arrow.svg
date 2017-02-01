@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="30px" height="53px" viewBox="0 0 30 53" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>icon/arrow</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Nouvel-evenement-Copy-8" transform="translate(-34.000000, -82.000000)" stroke-width="3" stroke="#FFFFFF" fill="#FFFFFF">
+            <g id="icon/arrow" transform="translate(36.000000, 84.000000)">
+                <path d="M2.78210464,0.466111772 C2.15576694,-0.155370591 1.10216013,-0.155370591 0.475822434,0.466111772 C0.169936583,0.771997622 0,1.17984542 0,1.61682521 C0,2.04894966 0.169936583,2.46165279 0.475822434,2.77239398 L22.1985731,24.4951447 L0.480677765,46.21304 C0.174791914,46.5189259 0,46.931629 0,47.3734641 C0,47.8055886 0.169936583,48.2134364 0.470967103,48.5193222 C0.776852953,48.8300634 1.18955608,49 1.6313912,49 C2.06837099,49 2.47621879,48.8300634 2.78210464,48.5241776 L25.6555688,25.6458581 C25.9614546,25.3399723 26.1362465,24.9272691 26.1362465,24.4902893 C26.1362465,24.0533096 25.9663099,23.6406064 25.6555688,23.3395759 L2.78210464,0.466111772 Z" transform="translate(13.068123, 24.500000) scale(-1, 1) translate(-13.068123, -24.500000) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

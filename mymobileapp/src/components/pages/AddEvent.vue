@@ -1,37 +1,41 @@
 <style lang="scss">
 input[type='text'], input[type='email']{
-	border-bottom: #ff2d55 solid 1px !important;
+	border-bottom: rgba(153, 62, 62, 0.5) solid 1px !important;
 	color: #ff2d55;
 }
 
-input[type='date']{
-	color: #ff2d55 !important;
+input[type='date'], input[type='time'], input[type='datetime-local']{
+	color: rgba(153, 62, 62, 0.5) !important;
 	-webkit-appearance: normal;
     appearance: normal;
+
+    &::-webkit-clear-button { 
+	  -webkit-appearance: none !important;
+	  margin: 0 !important;
+	}
 }
 
+.date-input{
+	width: 139px !important;
+}
 
 *::-webkit-input-placeholder {
-    color: #ff2d55;
+    color: rgba(153, 62, 62, 0.5);
 }
 
 *:-moz-placeholder {
     /* FF 4-18 */
-    color: #ff2d55;
+    color: rgba(153, 62, 62, 0.5);
 }
 
 *::-moz-placeholder {
     /* FF 19+ */
-    color: #ff2d55;
+    color: rgba(153, 62, 62, 0.5);
 }
 
 *:-ms-input-placeholder {
     /* IE 10+ */
-    color: #ff2d55;
-}
-
-ul.choose-colors{
-	display: inherit;
+    color: rgba(153, 62, 62, 0.5);
 }
 
 .add-buttons-bonus {
@@ -48,33 +52,145 @@ ul.choose-colors{
 	padding-bottom: 20px;
 }
 
-.add-page .page-content{
-	background-color: white;
+.add-page {
+	.page-content{
+		background-color: white;
+	}
+
+	.navbar{
+	    height: 193px;
+	    background: url('../../assets/bg3.svg');
+	    background-repeat: no-repeat;
+	    background-size: cover;
+
+	    &::after{
+	    	display: none;
+	    }
+
+	    .right, .left{
+			position: relative;
+			top: -50px;
+	    }
+	}
+
+	.page-content{
+		padding-top: 193px;
+
+		.content-block{
+			padding-top: 9px;
+		}
+	}
+
+	.header-title-createEvent{
+		top: 143px !important;
+		border: none;
+		background-color: rgba(255, 240, 222, 0.6);
+		height: 51px;
+
+		&::after{
+			display: none;
+		}
+
+		.header-title-content{
+			color: rgba(136, 80, 73, 0.5) !important;
+			font-family: "Interstate-Light" !important;
+			font-size: 14px;
+			letter-spacing: 1px;
+		}
+	}
+
+	.list-block{
+		ul{
+			background: none;
+		}
+
+		.item-content{
+			padding-left: 0 !important;
+
+			.item-inner{
+				padding: 0;
+			}
+		}
+	}
+
+	ul.choose-options{
+		li:nth-child(3){
+		  border-bottom: none !important;
+		}
+	}
+
+	.add-button{
+	    position: relative;
+	    top: -8px;
+	}
 }
 
 .item-inner{
 	&::after{
 		background-color: transparent !important;
 	}
-}
 
-/*.label-radio.active-state{
-	background-color: transparent !important;
-}
+	.separator-ou{
+	    padding-bottom: 12px;
+	    padding-left: 2px;
+	    font-family: 'Interstate-Light';
+	    font-size: 12px !important;
+	    color: rgba(136, 80, 73, 0.5);
+	}
 
-.ripple-wave{
-	display: none !important;
-}
+	.sync-list{
+		li{
+			display: inline-block;
+		    width: 40px;
+		    height: 40px;
+			background-repeat: no-repeat;
 
-.wrap-colors{
-	padding-left: 0 !important;
-
-	.choose-colors{
-		li:first-child label{
-			padding-left: 0 !important;
+			&:first-child{
+				background-image: url('../../assets/icon/google-calendar.svg');
+				background-size: 44px 41px;
+			}
+			&:nth-child(2){
+				background-image: url('../../assets/icon/fb.svg');
+				background-size: 28px 44px;
+				background-position-x: center;
+			}
+			&:nth-child(3){
+				background-image: url('../../assets/icon/addmore.svg');
+				background-size: 28px 44px;
+			}
 		}
 	}
-}*/
+}
+
+ul.create-form{
+	li{
+		margin-bottom: 12px;
+
+		input, input[type='text'], input[type='email']{
+		    border-bottom: rgba(153, 62, 62, 0.5) solid 1px !important;
+		    color: #9B3C80;
+		    font-family: "Interstate-Light";
+		    letter-spacing: 1px;
+		    transition: all .15s linear;
+
+		    &.focus-state{
+		      border-bottom: #86D3D7 solid 1px !important;
+		    } 
+		  }
+
+		  ::-webkit-input-placeholder{
+		    font-size: 17px !important;
+		    color: rgba(153, 62, 62, 0.5);
+		    font-family: "Interstate-Light";
+		  }
+	}
+}
+
+.wrap-event{
+	.wrap-colors{
+		margin-top: -18px;
+	}
+}
 
 </style>
 
@@ -84,11 +200,18 @@ ul.choose-colors{
     	<f7-nav-right>
 		    <f7-link icon="icon-bars" open-panel="right"></f7-link>
 	    </f7-nav-right>
+
+    	<f7-subnavbar class="header-title-createEvent">
+			<f7-block class="header-title-content">CREATION D'UN NOUVEL ÉVÈNEMENT</f7-block>
+    	</f7-subnavbar>
     </f7-navbar>
 
-            <form id="createEvent">
+    
+
+    <f7-block class="wrap-event">
+		<form id="createEvent">
 			<div class="list-block">
-			  <ul>
+			  <ul class="create-form">
 			    <li>
 			      <div class="item-content">
 			        <div class="item-inner">
@@ -101,120 +224,32 @@ ul.choose-colors{
 			    <li>
 			      <div class="item-content">
 			        <div class="item-inner">
-			          <div class="item-input">
-			            <input type="date" placeholder="Date" v-model="endDate"> 
+			          <div class="item-input date-input">
+			            <input type="text" onfocus="(this.type='date')" placeholder="Date" v-model="endDate"> 
 			            <br>
 			          </div>
+			          <div class="separator-ou">OU</div>
+			          <ul class="sync-list">
+			          	<li class="google"></li>
+			          	<li class="fb"></li>
+			          	<li class="addmore"></li>
+			          </ul>
 			        </div>
 			      </div>
 			    </li>
-			    <li>
+			</ul>
 
-
-		    	<div class="item-content wrap-colors">
-		    		<div class="item-inner">
-		    			<ul class="choose-colors">
-						    <li>
-						      <label class="label-radio item-content">
-						        <input type="radio" name="lightcolor" value="purple" v-model="eventcolor">
-						        <div class="item-media">
-						          <i class="icon icon-form-radio"></i>
-						        </div>
-						        <div class="item-inner">
-						          <div class="item-title">Purple</div>
-						        </div>
-						      </label>
-						    </li>
-						    <li>
-						      <label class="label-radio item-content">
-						        <input type="radio" name="lightcolor" value="pink" v-model="eventcolor">
-						        <div class="item-media">
-						          <i class="icon icon-form-radio"></i>
-						        </div>
-						        <div class="item-inner">
-						          <div class="item-title">Pink</div>
-						        </div>
-						      </label>
-						    </li>
-						    <li>
-						      <label class="label-radio item-content">
-						        <input type="radio" name="lightcolor" value="orange" v-model="eventcolor">
-						        <div class="item-media">
-						          <i class="icon icon-form-radio"></i>
-						        </div>
-						        <div class="item-inner">
-						          <div class="item-title">Orange</div>
-						        </div>
-						      </label>
-						    </li>
-						    <li>
-						      <label class="label-radio item-content">
-						        <input type="radio" name="lightcolor" value="amber" v-model="eventcolor">
-						        <div class="item-media">
-						          <i class="icon icon-form-radio"></i>
-						        </div>
-						        <div class="item-inner">
-						          <div class="item-title">Amber</div>
-						        </div>
-						      </label>
-						    </li>
-						    <li>
-						      <label class="label-radio item-content">
-						        <input type="radio" name="lightcolor" value="blue" v-model="eventcolor">
-						        <div class="item-media">
-						          <i class="icon icon-form-radio"></i>
-						        </div>
-						        <div class="item-inner">
-						          <div class="item-title">Blue</div>
-						        </div>
-						      </label>
-						    </li>
-						    	
-
-					  </ul>
-	    		</div>
-	    	</div>
-
-			    					  COULEUR : {{eventcolor}}
-			    </li>
-				<li class="add-buttons-bonus">
-				<a href="">
-					<div class="item-content">
-							<div class="item-media"><f7-icon f7="bell"></f7-icon></div>
-							<div class="item-inner">
-								<div class="item-title">Choisir une annonce de fin</div>
-							</div>
-						
-					</div>
-				</a>
-				<a href="">
-					<div class="item-content">
-							<div class="item-media"><f7-icon f7="compose"></f7-icon></div>
-							<div class="item-inner">
-								<div class="item-title">Ajouter une note</div>
-							</div>
-						
-					</div>
-				</a>
-				<a href="">
-					<div class="item-content">
-							<div class="item-media"><f7-icon f7="person"></f7-icon></div>
-							<div class="item-inner">
-								<div class="item-title">Inviter quelqu'un</div>
-							</div>
-						
-					</div>
-				</a>	
-
-				</li>
-				<li class="add-btn-valid">
-					<a href="/">
-						<f7-button round color="pink" type="submit" @click="addItem">Valider</f7-button>
-					</a>
-				</li>
-			  </ul>
-			</div>      
 		</form>		
+		<my-select-color></my-select-color>
+    </f7-block>
+		
+	<my-block-options></my-block-options>
+
+	<f7-button class="add-button back" @click="addItem">
+	     <span>Valider et envoyer</span>
+	</f7-button>
+
+	COULEUR : {{this.checked}}
 
 	</f7-page>
 </template>
@@ -222,13 +257,18 @@ ul.choose-colors{
 <script>  
 
 import ApiFire from '../../api'
+import SelectColor from '../selectcolor'
+import BlockOptions from '../blockoptions'
 
 export default {
-
+	components: {
+		MySelectColor: SelectColor,
+		MyBlockOptions: BlockOptions
+	},
 	data(){
 		return{
 			eventname: '',
-			eventcolor: '',
+			checked: '',
 			color: '',
 			progress: '',
 			status: false,
@@ -261,7 +301,7 @@ export default {
 				name: this.eventname,
 				endDate: this.end,
 				startDate: this.start,
-				color: this.eventcolor,
+				color: this.checked,
 				progress: this.progress,
 				status: this.status,
 				daysDiff: this.diffDays,

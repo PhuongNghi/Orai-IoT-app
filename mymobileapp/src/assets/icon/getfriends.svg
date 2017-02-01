@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="48px" height="38px" viewBox="0 0 48 38" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 41.2 (35397) - http://www.bohemiancoding.com/sketch -->
+    <title>Page 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Mon-compte-Copy" transform="translate(-45.000000, -689.000000)">
+            <g id="Page-1" transform="translate(46.000000, 690.000000)">
+                <path d="M31.2321,35 L1.2131,35 C0.8141,35 0.4821,34.674 0.5011,34.283 C0.8841,26.157 7.7761,20.805 16.2231,20.805 C24.6691,20.805 31.5611,26.157 31.9451,34.283 C31.9631,34.674 31.6311,35 31.2321,35 Z" id="Stroke-1" stroke="#EA8087" stroke-width="3" stroke-linecap="round"></path>
+                <path d="M25.7,12.6897 C25.7,17.8247 21.457,21.9867 16.223,21.9867 C10.989,21.9867 6.746,17.8247 6.746,12.6897 C6.746,7.5547 10.989,3.3927 16.223,3.3927 C21.457,3.3927 25.7,7.5547 25.7,12.6897" id="Fill-3" fill="#FFF6EF"></path>
+                <path d="M25.7,12.6897 C25.7,17.8247 21.457,21.9867 16.223,21.9867 C10.989,21.9867 6.746,17.8247 6.746,12.6897 C6.746,7.5547 10.989,3.3927 16.223,3.3927 C21.457,3.3927 25.7,7.5547 25.7,12.6897 Z" id="Stroke-5" stroke="#EA8087" stroke-width="3" stroke-linecap="round"></path>
+                <path d="M43.8417,6.983 C43.8417,3.403 40.7257,0.5 36.8817,0.5 C33.0387,0.5 29.9227,3.403 29.9227,6.983 C29.9227,10.563 33.0387,13.466 36.8817,13.466 C40.7257,13.466 43.8417,10.563 43.8417,6.983" id="Fill-7" fill="#FFFFFF"></path>
+                <path d="M43.8417,6.983 C43.8417,3.403 40.7257,0.5 36.8817,0.5 C33.0387,0.5 29.9227,3.403 29.9227,6.983 C29.9227,10.563 33.0387,13.466 36.8817,13.466 C40.7257,13.466 43.8417,10.563 43.8417,6.983 Z" id="Stroke-9" stroke="#EA8087" stroke-width="3" stroke-linecap="round"></path>
+                <path d="M41.3311,12.3482 L45.1581,16.9642" id="Stroke-11" stroke="#EA8087" stroke-width="3" stroke-linecap="round"></path>
+                <g id="Group-16" transform="translate(36.000000, 3.500000)">
+                    <path d="M0.8821,0.7161 C0.8821,0.7161 2.9591,0.3581 3.7661,2.4361" id="Fill-13" fill="#FFFFFF"></path>
+                    <path d="M0.8821,0.7161 C0.8821,0.7161 2.9591,0.3581 3.7661,2.4361" id="Stroke-15" stroke="#EA8087" stroke-width="2.5" stroke-linecap="round"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

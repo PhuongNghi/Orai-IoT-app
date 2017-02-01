@@ -33,6 +33,7 @@ ul.choose-options{
     &:nth-child(2){
       border-top: solid 1px #EEDDD8;
       border-bottom: solid 1px #EEDDD8;
+
     }
     &:nth-child(3){
       border-bottom: solid 1px #EEDDD8;
@@ -99,7 +100,7 @@ ul.choose-options{
             </div>
           </a>  
         </li>
-        <li>
+        <li v-if="isDetail">
           <a href="">
             <div class="item-content">
                 <div class="item-media trash"></div>
@@ -112,8 +113,6 @@ ul.choose-options{
         </li>
       </ul>
               
-        
-        
     </div>
 
   </div>
@@ -129,7 +128,7 @@ var minuterieRef = ApiFire.ref('minuteurs');
 var eventsRef = ApiFire.ref('events');
 
 export default {
-  props: [],
+  props: ['id', 'type', 'isDetail'],
   data () {
     return {
       
@@ -143,6 +142,8 @@ export default {
 
   },
   created(){      
+
+    // console.log(this.isDetail);
 
   }  
 }

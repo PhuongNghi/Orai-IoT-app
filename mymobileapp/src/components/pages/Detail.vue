@@ -115,12 +115,12 @@
       </f7-block>
 
       <span v-if="type == 'event'">
-          <my-block-options></my-block-options>
+          <my-block-options :id="id" :type="'event'" :isDetail="isDetail"></my-block-options>
 
       </span>
 
       <span v-if="type == 'minut'">
-          <my-block-options></my-block-options>
+          <my-block-options :id="id" :type="'minut'" :isDetail="isDetail"></my-block-options>
       </span>
       
   </f7-page>
@@ -143,7 +143,8 @@ export default {
       part3: false,
       navbarStatus: '',
       id: '',
-      type: ''
+      type: '',
+      isDetail: true
     }
   },
   created () {

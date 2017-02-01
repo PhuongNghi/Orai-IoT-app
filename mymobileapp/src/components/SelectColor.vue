@@ -154,11 +154,12 @@ export default {
   created(){      
     if(this.type == 'event'){
       this.mainColor = this.events[this.id].color;
+      this.checked = this.mainColor;
     } else if (this.type == 'minut'){
       this.mainColor = this.minuteurs[this.id].color;
+      this.checked = this.mainColor;
     }
 
-    this.checked = this.mainColor;
   }  
 }
 

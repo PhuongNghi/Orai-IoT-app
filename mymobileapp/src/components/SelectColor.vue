@@ -142,7 +142,8 @@ export default {
   props: ['id', 'type'],
   data () {
     return {
-      checked: ''
+      checked: '',
+      mainColor: ''
     }
   },
   firebase: {
@@ -151,13 +152,12 @@ export default {
   },
   methods: {
     updateColor(){
-      // console.log(this.events[this.id].status);
-
       if(this.type == 'event'){
-        if(this.events[this.id].status){
-          console.log(this.checked);
-          eventsRef.child(this.events[this.id]['.key']).child('color').set(this.checked);
+        eventsRef.child(this.events[this.id]['.key']).child('color').set(this.checked);
 
+        this.mainColor = this.checked;
+
+        if(this.events[this.id].status){
           this.$http.put(nodeServer, { 
               color: this.checked
             }).then(response => {
@@ -170,10 +170,23 @@ export default {
         }
 
       } else if (this.type == 'minut'){
+        minuterieRef.child(this.minuteurs[this.id]['.key']).child('color').set(this.checked);
+
+        if(this.minuteurs[this.id].status){
+          this.$http.put(nodeServer, { 
+              color: this.checked
+            }).then(response => {
+
+              console.log(response);
+
+          }, response => {
+            // error callback
+          });
+        }
        
       }
 
-      
+      this.$emit('updateColor');
     }  
   },
   created(){      

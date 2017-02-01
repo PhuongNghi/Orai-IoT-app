@@ -255,6 +255,7 @@
         border-color: rgba(197, 149, 143, 0.2);
         /*padding: 0;*/
         color: rgba(136, 80, 73, 0.5);
+        border-radius: 25px !important;
       }
     }
   }
@@ -432,7 +433,7 @@ export default {
 
       var events = setInterval(function(){
           checkProgress(eventTableau, ref);
-      },1500);
+      },1000);
 
   }  
 }

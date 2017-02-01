@@ -95,17 +95,17 @@ export default {
         checkProgress(minutTableau, minutRef, progress, minutKey);
       }, 500);
 
-    // this.$http.post(nodeServer, {
-    //     endDate: this.minuteurs[key].endDate, 
-    //     startDate: this.minuteurs[key].startDate, 
-    //     color: this.minuteurs[key].color
-    //   }).then(response => {
+    this.$http.post(nodeServer, {
+        endDate: this.minuteurs[key].endDate, 
+        startDate: this.minuteurs[key].startDate, 
+        color: this.minuteurs[key].color
+      }).then(response => {
 
-    //     console.log(response);
+        console.log(response);
 
-    // }, response => {
-    //   // error callback
-    // });
+    }, response => {
+      // error callback
+    });
 
     }
   },
@@ -123,7 +123,7 @@ export default {
         minutRef.child(minutTableau[l]['.key']).child('label').set(this.dureeMinuterie);
       }
 
-    }, 1500);  
+    }, 1000);  
 
     var checkProgressAlways = function(minutRef, minutTableau){
       var now = new Date().getTime();
@@ -139,13 +139,14 @@ export default {
         if(now > minutTableau[k].endDate){
           minutRef.child(minutTableau[k]['.key']).child('progress').set(0);
           minutRef.child(minutTableau[k]['.key']).child('status').set(false);
+          minutRef.child(minutTableau[k]['.key']).child('status').set(false);
         }
       } 
     }
 
     var minuteurs = setInterval(function(){
       checkProgressAlways(minutRef, minutTableau);
-    }, 500); 
+    }, 1000); 
 
   }  
 }

@@ -101,7 +101,7 @@
           <p>crée le {{ dateCreationLabel }}</p>
         </div>
 
-        <my-select-color :id="id" :type="'event'"></my-select-color>
+        <my-select-color :id="id" :type="'event'" ref="selectColor" v-on:updateColor="updateColorDetail"></my-select-color>
       </f7-block>
 
       <f7-block v-if="type == 'minut'">
@@ -138,6 +138,7 @@ export default {
   },
   data () {
     return {
+      checked: '',
       part1: false,
       part2: false,
       part3: false,
@@ -148,10 +149,11 @@ export default {
     }
   },
   created () {
-    this.fetchData()
+    this.fetchData();
   },
   watch: {
-    '$route': 'fetchData'
+    '$route': 'fetchData',
+    '$refs': 'getColor'
   },
   firebase: {
       events: ApiFire.ref('events'),
@@ -195,7 +197,6 @@ export default {
 
         this.progress = this.minuteurs[this.id].progress;
         this.color = this.minuteurs[this.id].color;
-
       }
 
       if(this.type == 'event'){
@@ -231,8 +232,16 @@ export default {
         this.color = this.events[this.id].color;
 
       }
-
       
+    },
+    updateColorDetail(){
+      if(this.type == 'minut'){
+        this.color = this.$refs.selectColor.checked;
+      } 
+
+      else if(this.type == 'event'){
+        this.color = this.$refs.selectColor.checked;
+      }
       
     }
   }

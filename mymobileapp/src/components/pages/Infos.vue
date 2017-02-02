@@ -61,7 +61,7 @@
     letter-spacing: 0.8px;
 
     &.createur{
-      margin-top: 37px;
+      margin-top: 26px;
     }
   }
 

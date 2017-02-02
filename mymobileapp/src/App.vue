@@ -274,7 +274,7 @@ i.icon.icon-bars{
 .add-button, .close-login{
     font-family: "Interstate-Light";
     position: relative;
-    bottom: -8vh;
+    bottom: -5vh;
     width: 50%;
     margin: 0 auto;
     background: linear-gradient(to right, #F15F6A, #FF8E70) !important;

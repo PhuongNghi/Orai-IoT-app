@@ -1,5 +1,11 @@
 <style lang="scss">
 
+
+.label-minut{
+  color:  rgba(136, 80, 73, 0.5) !important;  
+}
+
+
 </style>
 
 <template>
@@ -14,7 +20,7 @@
           </f7-list-item>
           <f7-list-item class="days-remaining">
 
-            <f7-block>
+            <f7-block class="label-minut">
               {{event.label}}
             </f7-block>
 
@@ -50,7 +56,8 @@ export default {
       linkEvent: '',
       progress: '',
       nextColor: '',
-      dureeMinuterie: ''
+      dureeMinuterie: '',
+      reload: false
     }
   },
   firebase: {
@@ -59,6 +66,7 @@ export default {
   },
   methods: {
     sendSablier: function(event, key){
+
       let minutKey = key;
       let progress;
       var minutTableau = this.minuteurs,
@@ -71,10 +79,33 @@ export default {
         } else{
           minuterieRef.child(this.minuteurs[j]['.key']).child('status').set(false);
         }
-      }
 
-      for (var k = 0; k < this.events.length; k++){
-        eventsRef.child(this.events[k]['.key']).child('status').set(false);
+        if(new Date().getTime() > minutTableau[j].endDate){
+          this.reload = true;
+
+          this.newEndDateDuree = minutTableau[j].eventDuree;
+          this.newEndDateDureeSplited = this.newEndDateDuree.split(":");
+          this.newEndDateDureeHours = this.newEndDateDureeSplited[0];
+          this.newEndDateDureeMin = this.newEndDateDureeSplited[1];
+
+          this.endDateFinalMinutes = (new Date().getTime() + this.newEndDateDureeMin * 60000);
+          this.endDateFinal = (this.endDateFinalMinutes + this.newEndDateDureeHours*60*60*1000);
+
+          minuterieRef.child(minutTableau[j]['.key']).child('endDate').set(this.endDateFinal);
+          minuterieRef.child(minutTableau[j]['.key']).child('startDate').set(new Date().getTime());
+
+          this.$http.post(nodeServer, {
+            endDate: this.minuteurs[key].endDate, 
+            startDate: this.minuteurs[key].startDate, 
+            color: this.minuteurs[key].color
+          }).then(response => {
+
+            // console.log(response);
+
+          }, response => {
+            // error callback
+          });
+        }
       }
 
       var checkProgress = function(tab, ref, progress, minutKey){
@@ -95,26 +126,34 @@ export default {
         checkProgress(minutTableau, minutRef, progress, minutKey);
       }, 500);
 
-    this.$http.post(nodeServer, {
-        endDate: this.minuteurs[key].endDate, 
-        startDate: this.minuteurs[key].startDate, 
-        color: this.minuteurs[key].color
-      }).then(response => {
+      for (var k = 0; k < this.events.length; k++){
+        eventsRef.child(this.events[k]['.key']).child('status').set(false);
+      }
 
-        console.log(response);
+      this.$http.post(nodeServer, {
+          endDate: this.minuteurs[key].endDate, 
+          startDate: this.minuteurs[key].startDate, 
+          color: this.minuteurs[key].color
+        }).then(response => {
 
-    }, response => {
-      // error callback
-    });
+          // console.log(response);
 
-    }
+      }, response => {
+        // error callback
+      });
+
+      this.$emit('sendSablierMinut');
+
+      }
   },
   mounted(){
 
     var minutTableau = this.minuteurs,
     minutRef = minuterieRef, 
     minutDuree, dureeSplited, 
-    dureeMinut = this.dureeMinuterie;
+    dureeMinut = this.dureeMinuterie,
+    reload = this.reload,
+    next, nextColor, singleEvent, mainColor;
 
     setTimeout(function() {
       for (var l = 0; l < minutTableau.length; l++){
@@ -128,6 +167,14 @@ export default {
     var checkProgressAlways = function(minutRef, minutTableau){
       var now = new Date().getTime();
 
+      for (var m = 0; m < minutTableau.length - 1; m++){
+          next = minutTableau[m+1];
+          nextColor = 'progress-event-deco-'+next.color;
+          singleEvent = minutTableau[m];
+          mainColor = singleEvent.color;
+          minutRef.child(singleEvent['.key']).child('nextColor').set(nextColor);
+        };
+
       for (var k = 0; k < minutTableau.length; k++){
 
         var progress = Math.round(((now - minutTableau[k].startDate) / (minutTableau[k].endDate - minutTableau[k].startDate)) * 100);
@@ -138,9 +185,12 @@ export default {
 
         if(now > minutTableau[k].endDate){
           minutRef.child(minutTableau[k]['.key']).child('progress').set(0);
-          minutRef.child(minutTableau[k]['.key']).child('status').set(false);
-          minutRef.child(minutTableau[k]['.key']).child('status').set(false);
+
+          if(!reload){
+            minutRef.child(minutTableau[k]['.key']).child('status').set(false);
+          }
         }
+
       } 
     }
 
@@ -152,4 +202,3 @@ export default {
 }
 
 </script>
-

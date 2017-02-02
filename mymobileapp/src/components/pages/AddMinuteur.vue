@@ -181,8 +181,6 @@ ul.add-minut{
 	     	<span>Valider et envoyer</span>
 		</f7-button>
 
-		COULEUR : {{this.checked}}
-
 	</f7-page>
 </template>
 
@@ -204,7 +202,7 @@ export default {
 		return{
 			eventname: '',
 			eventcolor: '',
-			status: false,
+			status: true,
 			endDate: '',
 			startDate: '',
 			nextColor: '',

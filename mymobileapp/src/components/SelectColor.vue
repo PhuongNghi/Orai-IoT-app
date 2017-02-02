@@ -88,36 +88,36 @@ ul.choose-colors{
       <div class="item-inner">
         <ul class="choose-colors">
           <li>
-            <label class="label-radio item-content">
-              <input type="radio" name="lightcolor" value="purple" id="purple" v-model="checked" @click="updateColor">
-              <div class="item-inner"></div>
-              <div class="item-title purple"></div>
+            <label class="label-radio item-content" @click="updateColor">
+              <input type="radio" name="lightcolor" value="purple" id="purple" v-model="checked">
+              <div class="item-inner" @click="updateColor"></div>
+              <div class="item-title purple" @click="updateColor"></div>
             </label>
           </li>
           <li>
-            <label class="label-radio item-content">
-              <input type="radio" name="lightcolor" value="pink" id="pink" v-model="checked" @click="updateColor">
+            <label class="label-radio item-content" @click="updateColor">
+              <input type="radio" name="lightcolor" value="pink" id="pink" v-model="checked" >
               <div class="item-inner"></div>
               <div class="item-title pink"></div>
             </label>
           </li>
           <li>
-            <label class="label-radio item-content">
-              <input type="radio" name="lightcolor" value="orange" id="orange" v-model="checked" @click="updateColor">
+            <label class="label-radio item-content" @click="updateColor">
+              <input type="radio" name="lightcolor" value="orange" id="orange" v-model="checked">
               <div class="item-inner"></div>
               <div class="item-title orange"></div>
             </label>
           </li>
           <li>
-            <label class="label-radio item-content">
-              <input type="radio" name="lightcolor" value="amber" id="amber" v-model="checked" @click="updateColor">
+            <label class="label-radio item-content" @click="updateColor">
+              <input type="radio" name="lightcolor" value="amber" id="amber" v-model="checked" >
               <div class="item-inner"></div>
               <div class="item-title amber"></div>
             </label>
           </li>
           <li>
-            <label class="label-radio item-content">
-              <input type="radio" name="lightcolor" value="blue" id="blue" v-model="checked" @click="updateColor">
+            <label class="label-radio item-content" @click="updateColor">
+              <input type="radio" name="lightcolor" value="blue" id="blue" v-model="checked" >
               <div class="item-inner"></div>
               <div class="item-title blue"></div>
             </label>
@@ -171,6 +171,8 @@ export default {
 
       } else if (this.type == 'minut'){
         minuterieRef.child(this.minuteurs[this.id]['.key']).child('color').set(this.checked);
+
+        this.mainColor = this.checked;
 
         if(this.minuteurs[this.id].status){
           this.$http.put(nodeServer, { 

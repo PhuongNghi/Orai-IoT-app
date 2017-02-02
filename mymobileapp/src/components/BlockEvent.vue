@@ -377,13 +377,15 @@ export default {
         color: this.events[key].color
       }).then(response => {
 
-        console.log(response);
+        // console.log(response);
 
     }, response => {
       // error callback
     });
 
+      this.$emit('sendSablier');
     }
+    
   },
   mounted(){      
       var eventTableau = this.events,

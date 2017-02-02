@@ -289,9 +289,6 @@ ul.create-form{
 	<f7-button class="add-button back" @click="addItem">
 	     <span>Valider et envoyer</span>
 	</f7-button>
-
-	COULEUR : {{this.checked}}
-
 	</f7-page>
 </template>
 

@@ -111,7 +111,7 @@
           <p>crée le {{ dateCreationLabel }}</p>
         </div>
 
-        <my-select-color :id="id" :type="'minut'"></my-select-color>
+        <my-select-color :id="id" :type="'minut'" ref="selectColor" v-on:updateColor="updateColorDetail"></my-select-color>
       </f7-block>
 
       <span v-if="type == 'event'">
@@ -152,8 +152,7 @@ export default {
     this.fetchData();
   },
   watch: {
-    '$route': 'fetchData',
-    '$refs': 'getColor'
+    '$route': 'fetchData'
   },
   firebase: {
       events: ApiFire.ref('events'),

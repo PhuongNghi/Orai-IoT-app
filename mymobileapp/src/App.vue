@@ -136,6 +136,41 @@ i.icon.icon-bars{
   }
 }
 
+.navbar-fixed .page .subnavbar, .navbar-fixed.page .subnavbar, .navbar-through .page .subnavbar, .navbar-through.page .subnavbar{
+  top: initial;
+}
+
+
+.main-notif-wrapper{
+  top: 114px;
+  height: 28px;
+  padding-left: 69px;
+  font-size: 14px;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  /*background-color: rgba(255, 240, 222, 0.6);*/
+  background-color: transparent;
+  color: rgba(136, 80, 73, 0.5);
+  letter-spacing: 1px;
+  font-family: 'Interstate-Light';
+  -webkit-transition: all 1s; 
+  transition: all 1s;
+  position: absolute;
+  width: 80%;
+  line-height: 32px;
+
+  &::after{
+    display: none;
+  }
+}
+.main-notif{
+
+    &::after{
+      display: none;
+    }
+}
+
 .main-navbar{
   top: 146px !important;
   padding: 0;
@@ -493,18 +528,27 @@ i.icon.icon-bars{
                 <f7-button @click="checkTabsOnClick" tab-link="#minuteur">Minuteurs</f7-button>
               </f7-buttons>
             </f7-subnavbar>
+
+            <!-- Notif -->
+            <div class="main-notif-wrapper">
+              <div class="main-notif" v-if="this.notif">
+                Votre {{this.notifType}} est envoyé
+              </div>
+              
+            </div>
+
             </f7-navbar>
             
             <f7-list>
           
             <f7-page tabs no-page-content swipeable class="main-tabs-content">
               <f7-page-content tab active id="event">
-                <my-block-event></my-block-event>
+                <my-block-event v-on:sendSablier="showNotifEvent"></my-block-event>
 
               </f7-page-content>
 
               <f7-page-content tab id="minuteur">
-                 <my-block-minuterie></my-block-minuterie>
+                 <my-block-minuterie v-on:sendSablierMinut="showNotifMinut"></my-block-minuterie>
 
               </f7-page-content>
             </f7-page>
@@ -545,7 +589,10 @@ export default {
         pagination: '.swiper-pagination',
         paginationClickable: true,
         nextButton: '.swiper-button-next'
-      }
+      },
+      notif: false,
+      notifType: '',
+      notifMinut: false
     }
   },
   mounted(){
@@ -582,7 +629,60 @@ export default {
         document.getElementById('btn-slider-next').style.display = 'none';
         document.getElementById('close-final-slider').style.display = 'block';
       }
-      // console.log(this.lastSlide);
+
+    },
+    showNotif(){
+      this.notif = true;
+
+      function fade(element) {
+          var op = 1;  
+          var timer = setInterval(function () {
+              if (op <= 0.1){
+                  clearInterval(timer);
+                  element.style.display = 'none';
+              }
+              element.style.opacity = op;
+              element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+              op -= op * 0.1;
+          }, 50);
+      }
+
+      function unfade(element) {
+          var op = 0.1;  
+          element.style.display = 'block';
+          var timer = setInterval(function () {
+              if (op >= 1){
+                  clearInterval(timer);
+              }
+              element.style.opacity = op;
+              element.style.filter = 'alpha(opacity=' + op * 100 + ")";
+              op += op * 0.1;
+          }, 10);
+      }
+
+      unfade(document.getElementsByClassName('main-notif-wrapper')[0]);
+
+      document.getElementsByClassName('main-notif-wrapper')[0].style.background = 'rgba(255, 240, 222, 0.6)';
+      document.getElementsByClassName('main-notif-wrapper')[0].style.display = 'block';
+      document.getElementsByClassName('main-notif-wrapper')[0].style.top = '114px';
+      document.getElementsByClassName('main-notif-wrapper')[0].style.color = 'rgba(136, 80, 73, 0.5)';
+
+      setTimeout(function(){ 
+        this.notif = false;
+        document.getElementsByClassName('main-notif-wrapper')[0].style.background = 'transparent';
+        document.getElementsByClassName('main-notif-wrapper')[0].style.color = 'transparent';
+        document.getElementsByClassName('main-notif-wrapper')[0].style.top = '100px';
+        fade(document.getElementsByClassName('main-notif-wrapper')[0]);
+      }, 2500);
+
+    },
+    showNotifMinut(){
+      this.notifType = "minuteur";
+      this.showNotif();
+    },
+    showNotifEvent(){
+      this.notifType = "évènement";
+      this.showNotif();
     }
   }
 }

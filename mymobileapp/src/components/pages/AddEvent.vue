@@ -192,6 +192,23 @@ ul.create-form{
 	}
 }
 
+.header-title-createEvent{
+	.header-title-content{
+		line-height: 49px;
+	}
+
+	.icon-event{
+	    background-position-y: 0px !important;
+	    margin-right: 6px !important;
+	    margin-left: -10px !important;
+	}
+
+	.icon-minut{
+	    margin-right: 6px;
+	    margin-left: -10px;
+	}
+}
+
 </style>
 
 <template>  
@@ -202,7 +219,8 @@ ul.create-form{
 	    </f7-nav-right>
 
     	<f7-subnavbar class="header-title-createEvent">
-			<f7-block class="header-title-content">CREATION D'UN NOUVEL ÉVÈNEMENT</f7-block>
+			<f7-block class="header-title-content">
+			<span class="icon-event"></span> CREATION D'UN NOUVEL ÉVÈNEMENT</f7-block>
     	</f7-subnavbar>
     </f7-navbar>
 

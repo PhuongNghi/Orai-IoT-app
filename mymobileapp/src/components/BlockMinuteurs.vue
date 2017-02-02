@@ -122,9 +122,9 @@ export default {
         
       }
 
-      setTimeout(function() {
-        checkProgress(minutTableau, minutRef, progress, minutKey);
-      }, 500);
+      // setTimeout(function() {
+      //   checkProgress(minutTableau, minutRef, progress, minutKey);
+      // }, 500);
 
       for (var k = 0; k < this.events.length; k++){
         eventsRef.child(this.events[k]['.key']).child('status').set(false);
@@ -177,7 +177,7 @@ export default {
 
       for (var k = 0; k < minutTableau.length; k++){
 
-        var progress = Math.round(((now - minutTableau[k].startDate) / (minutTableau[k].endDate - minutTableau[k].startDate)) * 100);
+        var progress = ((now - minutTableau[k].startDate) / (minutTableau[k].endDate - minutTableau[k].startDate)) * 100;
 
         if(minutTableau[k].status == true){
           minutRef.child(minutTableau[k]['.key']).child('progress').set(progress);

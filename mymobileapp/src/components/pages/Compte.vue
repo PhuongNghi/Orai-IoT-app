@@ -75,7 +75,7 @@
   .compte-options{ 
     background: -webkit-linear-gradient(#FFF6EF, #FFFFFF) !important;
     background: linear-gradient(#FFF6EF, #FFFFFF) !important;
-    height: 100%;
+    height: 100px;
 
     .getfriends-wrap{
       padding-top: 19px;
@@ -99,6 +99,10 @@
       }
     }
   }
+
+  .page-content{
+    padding-top: 37px;
+  }
 }
 
 </style>
@@ -116,8 +120,8 @@
     </f7-navbar>
 
     <f7-block class="compte-main-wrap">
-      <h1>Phuong Nghi Jenn Nguyen</h1>
-      <p>Vous avez écoulé <span>120 heures</span> d’attente sur votre sablier, félicitations !</p>
+      <h1>Véro</h1>
+      <p>Vous avez écoulé <span>5 min</span> d’attente sur votre sablier, félicitations !</p>
     </f7-block>
 
     <f7-block class="compte-options">
@@ -129,6 +133,10 @@
       </div>
     </f7-block>
 
+    <f7-button class="add-button" @click="logout">
+       <span>Se déconnecter</span>
+    </f7-button>
+
   </f7-page>
 </template>
 
@@ -136,6 +144,13 @@
 
 export default {
 
+  methods: {
+    logout(){
+      sessionStorage.setItem("user", "Véro");
+      location.reload();
+      // console.log("COUCOU");
+    }
+  }
 
 }
 </script>

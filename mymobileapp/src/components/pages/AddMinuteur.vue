@@ -83,6 +83,7 @@ ul.add-minut{
 	}
 }
 
+
 </style>
 
 <template>  
@@ -92,7 +93,8 @@ ul.add-minut{
 		    <f7-link icon="icon-bars" open-panel="right"></f7-link>
 	    </f7-nav-right>
 	    <f7-subnavbar class="header-title-createEvent">
-			<f7-block class="header-title-content">CREATION D'UN NOUVEAU MINUTEUR</f7-block>
+			<f7-block class="header-title-content">
+			<span class="icon-minut"></span> CREATION D'UN NOUVEAU MINUTEUR</f7-block>
     	</f7-subnavbar>
     </f7-navbar>
 
@@ -191,7 +193,11 @@ import DureeMinut from '../../checkDureeMinute'
 import SelectColor from '../selectcolor'
 import BlockOptions from '../blockoptions'
 
+var nodeServer = 'http://orai.kevinmoutier.com/set';
+var nodeServerInit = 'http://orai.kevinmoutier.com/init';
+
 var minuterieRef = ApiFire.ref('minuteurs');
+var eventsRef = ApiFire.ref('events');
 
 export default {
 	components: {
@@ -216,7 +222,8 @@ export default {
 		}
 	},
 	firebase: {
-		minuteurs: minuterieRef
+		minuteurs: minuterieRef,
+		events: eventsRef
 	},
 	methods: {
 		addItem () {
@@ -256,6 +263,33 @@ export default {
 				progress: this.progress,
 				type: this.type,
 				label: this.label
+			});
+
+          	if(this.minuteurs.length == 1 && this.events.length == 0){
+
+	            this.$http.post(nodeServerInit, {
+
+	              }).then(response => {
+
+	                // console.log(response);
+
+	            }, response => {
+	              // error callback
+	            });
+            
+          	}
+
+
+			this.$http.post(nodeServer, {
+				endDate: this.endDateFinal, 
+				startDate: this.now, 
+				color: this.checked
+			}).then(response => {
+
+			// console.log(response);
+
+			}, response => {
+			// error callback
 			});
 
 			for (var k = 0; k < this.minuteurs.length - 1; k++){

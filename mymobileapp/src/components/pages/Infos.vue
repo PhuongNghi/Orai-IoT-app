@@ -34,6 +34,47 @@
       letter-spacing: 1px;
     }
   }
+
+  .page-content{
+    padding-top: 239px;
+  }
+
+  h1{
+    font-family: "Grifo-M-Bold" !important;
+    letter-spacing: 1px;
+    margin-bottom: 0;
+    color: rgba(136, 80, 73, 0.5) !important;
+  }
+
+  h2{
+    margin: 0;
+    font-family: "Interstate-Light" !important;
+    color: #c4a5a0 !important;
+    font-size: 11px;
+    letter-spacing: 0.8px;
+  }
+
+  h3{
+    font-family: "Interstate-Light" !important;
+    color: #caa5a4;
+    margin-bottom: 10px;
+    letter-spacing: 0.8px;
+
+    &.createur{
+      margin-top: 37px;
+    }
+  }
+
+  li{
+    font-family: "Interstate-Light" !important;
+    color: rgba(49, 37, 37, 0.5) !important;
+    letter-spacing: 1.3px;
+    list-style: none;
+  }
+
+  ul{
+    padding: 0;
+  }
 }
 
 </style>
@@ -50,6 +91,26 @@
     </f7-navbar>
 
     <f7-block class="">
+
+      <h1>Orai</h1>
+      <h2>2017 - Gobelins, l’école de l’image</h2>
+
+      <h3 class="createur">Créateurs</h3>
+      <ul>
+        <li>Anaïs Maxin - Designer</li>
+        <li>Aurélie Rémina - Designer</li>
+      </ul>
+      <ul>
+        <li>Phuong Nghi Nguyen - Développeuse</li>
+        <li>Kévin Moutier - Développeur</li>
+      </ul>
+
+      <h3>Remerciements</h3>
+      <ul>
+        <li>Véronique Ficara</li>
+        <li>Julien Mahe</li>
+      </ul>
+
       
     </f7-block>
 

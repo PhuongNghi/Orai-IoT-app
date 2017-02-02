@@ -22,7 +22,10 @@
 
 @font-face {
   font-family: "Grifo-M-Bold";
-  src: url("assets/font/grifo-bold-m.ttf") format('truetype');
+  src: url("assets/font/grifo-bold-m-v2.ttf") format('truetype'),
+      url("assets/font/grifo-bold-m-v2-webfont.woff") format('woff'),
+      url("assets/font/grifo-bold-m-v2-webfont.woff2") format('woff2');
+  /*src: url('assets/font/AbrilFatface-Regular.otf') format('opentype');*/
 }
 
 @font-face {
@@ -66,6 +69,7 @@
 .login-screen-content{
   form{
     margin: 44% auto !important;
+    margin-bottom: 30px !important;
   }
 }
 
@@ -144,7 +148,7 @@ i.icon.icon-bars{
 .main-notif-wrapper{
   top: 114px;
   height: 28px;
-  padding-left: 69px;
+  padding-left: 40px;
   font-size: 14px;
   text-align: center;
   display: flex;
@@ -157,7 +161,7 @@ i.icon.icon-bars{
   -webkit-transition: all 1s; 
   transition: all 1s;
   position: absolute;
-  width: 80%;
+  width: 100%;
   line-height: 32px;
 
   &::after{
@@ -200,6 +204,34 @@ i.icon.icon-bars{
       background-color: #FFF7F1 !important;
     }
   }
+}
+
+.icon-event{
+  display: block;
+  background-image: url('assets/icon/calendar.svg');
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 30px;
+  background-size: 21px;
+  float: left;
+  background-position-y: 2px;
+  margin-right: -16px;
+  margin-left: 12px;
+  margin-top: 11px;
+}
+
+.icon-minut{
+  display: block;
+  background-image: url('assets/icon/chrono.svg');
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 30px;
+  background-size: 21px;
+  float: left;
+  background-position-y: 2px;
+  margin-right: -26px;
+  margin-left: 17px;
+  margin-top: 11px;
 }
 
 .main-tabs-content{
@@ -287,7 +319,7 @@ i.icon.icon-bars{
 }
 
 .swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction{
-  bottom: 100px;
+  bottom: 97px;
 }
 
 .swiper-button-next{
@@ -312,6 +344,8 @@ i.icon.icon-bars{
   z-index: 2;
   bottom: 55px;
   display: none;
+  width: 56%;
+  bottom: 25px;
 }
 
 .popup{
@@ -420,10 +454,91 @@ i.icon.icon-bars{
   }
 }
 
-
 .layout-dark .item-link.active-state{
-    background-color: transparent !important;
+  background-color: transparent !important;
 
+}
+
+.swiper-button-next{
+  background-image: url('assets/icon/next.svg') !important;
+  width: 46px;
+  background-size: 44px;
+  margin-right: -12Px;
+}
+
+.create-account{
+  .item-link{
+    margin-top: 60px;
+    position: relative;
+    top: 46px;
+    color: rgba(153, 62, 62, 0.5) !important;
+    font-family: 'Interstate-Light';
+    letter-spacing: 1px;
+  }
+}
+
+.close-slider{
+  color: rgba(153, 62, 62, 0.5) !important;
+  font-family: 'Interstate-Light';
+  letter-spacing: 1px;
+}
+
+.swiper-slide{
+
+  img{
+    margin-top: 44px;
+
+    &.slide-2-img{
+      margin-top: 18px !important;
+    }
+  }
+
+  h1{
+    color: #9B3C80;
+    font-family: 'Grifo-M-Bold';
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+
+    &.slide-2{
+      margin-top: 0;
+    }
+  }
+
+  p{
+    padding: 0 35px;
+    color: rgba(153, 62, 62, 0.5) !important;
+    font-family: 'Interstate-Light';
+    letter-spacing: 1px;
+    font-size: 15px;
+    margin-top: 0;
+
+  }
+}
+
+#main-create-screen{
+  padding-top: 44%;
+  background-color: #fffbf7;
+
+  ul{
+    background: #fffbf7;
+  }
+
+  .password{
+    margin-top: 27px;
+    margin-bottom: 44px;
+  }
+
+  .loginBack{
+    position: absolute;
+    z-index: 20;
+    bottom: -430px;
+    letter-spacing: 1px;
+
+    a{
+      color: rgba(153, 62, 62, 0.5) !important;
+      font-family: 'Interstate-Light';
+    }
+  }
 }
 
 </style>
@@ -433,20 +548,53 @@ i.icon.icon-bars{
   <div id="app">
 
     <!-- Login Screen -->
-    <div class="login-screen modal-in">
+    <div id="main-login-screen" class="login-screen modal-in">
       <f7-view>
         <f7-pages>
           <f7-page login-screen>
             <f7-list form>
               <f7-list-item>
-                <f7-input name="username" placeholder="Username" type="text" class="login-input"></f7-input>
+                <f7-input name="username" placeholder="Pseudonyme" type="text" class="login-input" v-model="usualUser"></f7-input>
               </f7-list-item>
               <f7-list-item>
-                <f7-input name="password" type="password" placeholder="Password" class="login-input"></f7-input>
+                <f7-input name="password" type="password" placeholder="Mot de passe" class="login-input"></f7-input>
               </f7-list-item>
             </f7-list>
             <f7-list>
-              <f7-list-button close-login-screen class="close-login" @click="openTuto">Valider</f7-list-button>
+              <f7-list-button class="create-account" @click="openCreation">Créer un compte</f7-list-button>
+            </f7-list>
+            <f7-list>
+              <f7-list-button close-login-screen class="close-login" @click="login">Valider</f7-list-button>
+            </f7-list>
+          </f7-page>
+        </f7-pages>
+      </f7-view>
+    </div>
+
+    <!-- Create Screen -->
+    <div id="main-create-screen" class="login-screen popup">
+      <f7-view>
+        <f7-list>
+          <f7-list-button close-create-screen @click="" class="loginBack back">Se connecter</f7-list-button>
+        </f7-list>
+        <f7-pages>
+          <f7-page create-screen>
+
+            
+
+            <f7-list form>
+              <f7-list-item>
+                <f7-input name="username" placeholder="Pseudonyme" type="text" class="login-input" v-model="newUser"></f7-input>
+              </f7-list-item>
+              <f7-list-item>
+                <f7-input name="password" type="password" placeholder="Mot de passe" class="login-input"></f7-input>
+              </f7-list-item>
+              <f7-list-item>
+                <f7-input name="password" type="password" placeholder="Confirmation de mot de passe" class="login-input password"></f7-input>
+              </f7-list-item>
+            </f7-list>
+            <f7-list>
+              <f7-list-button close-login-screen @click="openTuto" class="close-login">Créer son compte</f7-list-button>
             </f7-list>
           </f7-page>
         </f7-pages>
@@ -456,22 +604,32 @@ i.icon.icon-bars{
     <!-- Swiper -->
     <div id="popup-tuto" class="popup">
       <span class="close-slider" @click="closeTuto">SKIP</span>
-      <span id="close-final-slider" @click="closeTuto">J'ai compris</span>
+      <span id="close-final-slider" @click="closeTuto" class="add-button button">J'ai compris</span>
       <swiper :options="swiperOption">
         <swiper-slide>
           <img src="./assets/1.svg" alt="">
+          <h1>Allumer l'objet</h1>
+          <p>Appuyez sur le bouton rouge pour commencer à utiliser votre Orai.</p>
         </swiper-slide>
         <swiper-slide>
-          <img src="./assets/2.svg" alt="">
+          <img src="./assets/2.svg" alt="" class="slide-2-img">
+          <h1 class="slide-2">Connecter l’objet à internet</h1>
+          <p>Connectez-vous à votre Orai dans la liste des connexions WIFI et suivez les instructions.</p>
         </swiper-slide>
         <swiper-slide>
           <img src="./assets/3.svg" alt="">
+          <h1>Créer un sablier</h1>
+          <p>Les sabliers représentent le temps qui s’écoule.</p>
         </swiper-slide>
         <swiper-slide>
           <img src="./assets/4.svg" alt="">
+          <h1>Événements/Chronomètre</h1>
+          <p>Les sabliers peuvent représenter le temps jusqu’à l’arrivée d’un événement… <br><br> … ou un temps défini à écouler.</p>
         </swiper-slide>
         <swiper-slide id="last-slide">
           <img src="./assets/5.svg" alt="">
+          <h1>Diffuser vos sabliers</h1>
+          <p>Activez un sablier pour le transférer sur votre Orai.</p>
         </swiper-slide>
         <div class="swiper-pagination" slot="pagination"></div>
         <div id="btn-slider-next" class="swiper-button-next" slot="button-next" @click="checkLastSlide"></div>
@@ -524,8 +682,10 @@ i.icon.icon-bars{
             <!-- TABS -->
             <f7-subnavbar class="main-navbar">
               <f7-buttons>
-                <f7-button @click="checkTabsOnClick" tab-link="#event" active>Évènements</f7-button>
-                <f7-button @click="checkTabsOnClick" tab-link="#minuteur">Minuteurs</f7-button>
+                <f7-button @click="checkTabsOnClick" tab-link="#event" active>
+                <span class="icon-event"></span>Évènements</f7-button>
+                <f7-button @click="checkTabsOnClick" tab-link="#minuteur">
+                <span class="icon-minut"></span>Minuteurs</f7-button>
               </f7-buttons>
             </f7-subnavbar>
 
@@ -543,7 +703,7 @@ i.icon.icon-bars{
           
             <f7-page tabs no-page-content swipeable class="main-tabs-content">
               <f7-page-content tab active id="event">
-                <my-block-event v-on:sendSablier="showNotifEvent"></my-block-event>
+                <my-block-event :user="this.user" v-on:sendSablier="showNotifEvent"></my-block-event>
 
               </f7-page-content>
 
@@ -575,7 +735,6 @@ import BlockEvent from 'components/blockevent'
 import BlockMinuterie from 'components/blockminuteurs'
 
 export default {
-
   components: {
     MyBlockEvent: BlockEvent,
     MyBlockMinuterie: BlockMinuterie
@@ -592,7 +751,10 @@ export default {
       },
       notif: false,
       notifType: '',
-      notifMinut: false
+      notifMinut: false,
+      user: '',
+      newUser: '',
+      usualUser: ''
     }
   },
   mounted(){
@@ -618,10 +780,16 @@ export default {
     openTuto: function(){
       this.tuto = document.getElementById("popup-tuto");
       this.tuto.classList.add("modal-in");
+
+      this.login();
     },
     closeTuto: function(){
       this.tuto = document.getElementById("popup-tuto");
       this.tuto.classList.add("modal-out");
+    },
+    openCreation: function(){
+      this.creation = document.getElementById("main-create-screen");
+      this.creation.classList.add("modal-in");
     },
     checkLastSlide: function(){
       this.lastSlide = document.getElementById('last-slide').classList.contains('swiper-slide-next');
@@ -683,6 +851,17 @@ export default {
     showNotifEvent(){
       this.notifType = "évènement";
       this.showNotif();
+    },
+    login(){
+      if(this.usualUser){
+        this.user = this.usualUser;
+      } else {
+        this.user = this.newUser;
+      }
+
+      sessionStorage.setItem("user", this.user);
+
+      console.log(this.user);
     }
   }
 }

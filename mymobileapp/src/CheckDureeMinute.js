@@ -11,8 +11,11 @@ var checkDuree = function(tabDuree){
   else if(dureeSplited[0] > 1 && dureeSplited[1] < 1) {
     duree = dureeSplited[0] + ' heures';
   }
-  else if(dureeSplited[1] >= 1 && dureeSplited[0] < 1) {
+  else if(dureeSplited[1] > 1 && dureeSplited[0] < 1) {
     duree = dureeSplited[1] + ' minutes';
+  }
+  else if(dureeSplited[1] > 0 && dureeSplited[0] < 1) {
+    duree = dureeSplited[1] + ' minute';
   }
 
   if(dureeSplited[0] == 1 && dureeSplited[1] == 1) {

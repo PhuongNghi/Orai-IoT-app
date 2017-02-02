@@ -327,9 +327,11 @@
             <f7-button class="btn-send-to-sablier" @click="sendSablier(event, key)">Activer</f7-button>
           </f7-block>
 
+
         </f7-list-item>
       </f7-link>
     </f7-list-group>
+
   </div>
 
 </template>
@@ -341,9 +343,9 @@ import Vue from 'vue'
 var minuterieRef = ApiFire.ref('minuteurs');
 var eventsRef = ApiFire.ref('events');
 var nodeServer = 'http://orai.kevinmoutier.com/set';
+var nodeServerInit = 'http://orai.kevinmoutier.com/init';
 
 export default {
-
   data () {
     return {
       eventdate: '',
@@ -371,23 +373,38 @@ export default {
         minuterieRef.child(this.minuteurs[k]['.key']).child('progress').set(0);
       }
 
-    this.$http.post(nodeServer, {
-        endDate: this.events[key].endDate, 
-        startDate: this.events[key].startDate, 
-        color: this.events[key].color
-      }).then(response => {
+      this.$http.post(nodeServer, {
+          endDate: this.events[key].endDate, 
+          startDate: this.events[key].startDate, 
+          color: this.events[key].color
+        }).then(response => {
 
-        // console.log(response);
+          // console.log(response);
 
-    }, response => {
-      // error callback
-    });
+      }, response => {
+        // error callback
+      });
+
+      if(this.events.length == 1 && this.minuteurs.length == 0){
+
+        this.$http.post(nodeServerInit, {
+
+          }).then(response => {
+
+            // console.log(response);
+
+        }, response => {
+          // error callback
+        });
+        
+      }
 
       this.$emit('sendSablier');
     }
     
   },
   mounted(){      
+
       var eventTableau = this.events,
           ref = eventsRef,
           dateToday, dateStartNew, dateStartNewSplit, dateStartNewFinal, 

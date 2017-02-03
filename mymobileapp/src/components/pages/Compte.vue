@@ -120,8 +120,8 @@
     </f7-navbar>
 
     <f7-block class="compte-main-wrap">
-      <h1>Phuong Nghi</h1>
-      <p>Vous avez écoulé <span>15 heures</span> d’attente sur votre sablier, félicitations !</p>
+      <h1>Véro</h1>
+      <p>Vous avez écoulé <span>5 min</span> d’attente sur votre sablier, félicitations !</p>
     </f7-block>
 
     <f7-block class="compte-options">
@@ -146,7 +146,7 @@ export default {
 
   methods: {
     logout(){
-      sessionStorage.setItem("user", "Véro");
+      sessionStorage.setItem("user", "Phuong-Nghi");
       location.reload();
       // console.log("COUCOU");
     }

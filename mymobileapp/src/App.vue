@@ -1,23 +1,7 @@
 <style lang="scss">
-
-@font-face {
-  font-family: "Interstate-Bold";
-  src: url("assets/font/Interstate-Bold.ttf") format('truetype');
-}
-
 @font-face {
   font-family: "Interstate-Light";
   src: url("assets/font/Interstate-Light.ttf") format('truetype');
-}
-
-@font-face {
-  font-family: "Interstate-Regular";
-  src: url("assets/font/Interstate-Regular.ttf") format('truetype');
-}
-
-@font-face {
-  font-family: "Grifo-M-Black";
-  src: url("assets/font/grifo-black-m.ttf") format('truetype');
 }
 
 @font-face {
@@ -26,21 +10,6 @@
       url("assets/font/grifo-bold-m-v2-webfont.woff") format('woff'),
       url("assets/font/grifo-bold-m-v2-webfont.woff2") format('woff2');
   /*src: url('assets/font/AbrilFatface-Regular.otf') format('opentype');*/
-}
-
-@font-face {
-  font-family: "Grifo-M-Light";
-  src: url("assets/font/grifo-light-m.ttf") format('truetype');
-}
-
-@font-face {
-  font-family: "Grifo-M-Medium";
-  src: url("assets/font/grifo-medium-m.ttf") format('truetype');
-}
-
-@font-face {
-  font-family: "Grifo-M-Regular";
-  src: url("assets/font/grifo-regular-m.ttf") format('truetype');
 }
 
 .login-input{
